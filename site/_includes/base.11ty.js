@@ -11,6 +11,7 @@ module.exports = async function(data, zones) {
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1">
 		<title>${data.title || data.site.title}</title>
+    <description>${data.description || data.site.description}</description>
     <script>
 		window.pageData = {};
 		</script>

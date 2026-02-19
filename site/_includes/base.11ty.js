@@ -15,6 +15,14 @@ module.exports = async function(data, zones) {
     <script>
 		window.pageData = {};
 		</script>
+    <style>
+      pre {
+        max-width: 900px;
+      }
+      pre > code {
+        white-space: pre-wrap;
+      }
+    </style>
 		${zones.earlyHead || ''}
 		${templateStyle}
 		${zones.lateHead || ''}

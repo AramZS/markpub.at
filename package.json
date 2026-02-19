@@ -1,0 +1,27 @@
+{
+  "name": "markpub.at",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/AramZS/markpub.at#readme",
+  "bugs": {
+    "url": "https://github.com/AramZS/markpub.at/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AramZS/markpub.at.git"
+  },
+  "license": "MIT",
+  "author": "Aram Zucker-Scharff",
+  "type": "commonjs",
+  "main": "site/.eleventy.js",
+  "scripts": {
+    "start": "eleventy --serve --watch",
+    "build": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  }
+}

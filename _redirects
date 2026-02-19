@@ -1,0 +1,26 @@
+# Bluesky 
+https://chronotope.aramzs.xyz/ https://bsky.app/profile/chronotope.aramzs.xyz 301!
+http://chronotope.aramzs.xyz/ https://bsky.app/profile/chronotope.aramzs.xyz 301!
+http://chronotope.aramzs.xyz/* https://bsky.app/profile/chronotope.aramzs.xyz/:splat 301!
+https://chronotope.aramzs.xyz/* https://bsky.app/profile/chronotope.aramzs.xyz/:splat 301!
+
+# Feed
+/atom.xml /blog/feed.xml
+/blog/feed.xml /writing/feed.xml
+
+# Blog moved to Writing (final vestige of blog to digital garden conversion)
+/blog/ /writing/
+
+# Tagged
+/tags/ /topic/
+/blog/tagged/ /topic/
+/topic/quote/ /resources/quotes/
+/quotes/ /resources/quotes/
+
+# Misc Pages
+/bookshelf/ /books/
+/forrest /forest/
+/ae/ /
+/my/ /about/
+/Shipment/ /
+/Order /

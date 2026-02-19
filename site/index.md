@@ -11,10 +11,10 @@ to the world.
 
 ```json
 {
-    "$type": "at.markpub.markdown",
-    "text": "# Hello \n Hello to the world.",
-    "flavor": "GFM",
-    "preferedRenderer": "markdown-it"
+	"$type": "at.markpub.markdown",
+	"text": "# Hello \n Hello to the world.",
+	"flavor": "GFM",
+	"preferedRenderer": "markdown-it"
 }
 ```
 
@@ -41,8 +41,8 @@ to the world.
 		"$type": "at.markpub.markdown",
 		"text": "<markdown here>",
 		"flavor": "CommonMark",
-        "preferredRenderer": "markdown-it",
-        "extensions": ["YAML"]
+		"preferredRenderer": "markdown-it",
+		"extensions": ["YAML"]
 	},
 	"bskyPostRef": {
 		"$type": "com.atproto.repo.strongRef",

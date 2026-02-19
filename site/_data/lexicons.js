@@ -3,8 +3,8 @@ module.exports = [
     id: 'at.markpub.markdown',
     description:
       'A block of markdown text with metadata about its flavor and renderer.',
-    type: 'record',
-    record: {
+    type: 'object',
+    object: {
       type: 'object',
       text: {
         description:

@@ -1,5 +1,6 @@
 ---
 title: Hello world
+layout: index.11ty.js
 ---
 
 # Hello

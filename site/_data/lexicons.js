@@ -21,6 +21,7 @@ module.exports = [
           },
           "facets": {
             "type": "array",
+            description: "Facets here represent rendered versions of Markdown strings. A bold Markdown string `**bold**` might be represented by a richtext facet of #bold, in which case it is suggested to be presented without the Markdown markup as `<strong>bold</strong>",
             "items": {
               "type": "ref",
               "ref": "pub.leaflet.richtext.facet"

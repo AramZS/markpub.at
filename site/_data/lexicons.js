@@ -43,9 +43,9 @@ module.exports = [
         description:
           "Markdown may be rendered in many flavors. The most common are CommonMark and Github Flavored Markdown (GFM). Generally your markdown is one of those two and if you don't know then it is likely CommonMark. At this time the lexicon only recognizes these two flavors. Submit a PR if you think one should be added.",
         type: 'string',
-        enum: ['GFM', 'CommonMark'],
-        default: 'CommonMark',
-        examples: ['GFM', 'CommonMark'],
+        knownValues: ['gfm', 'commonmark'],
+        default: 'commonmark',
+        examples: ['gfm', 'commonmark'],
         optional: false,
       },
       renderingRules: {

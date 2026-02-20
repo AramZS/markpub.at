@@ -9,9 +9,34 @@ module.exports = [
       text: {
         description:
           'Text in markdown. May include anything that is valid markdown syntax for your flavor. Make sure it is properly escaped if necessary.',
-        type: 'string',
-        examples: ['# Hello World\nThis is a sample markdown text.'],
+        type: 'object',
+        //examples: ['# Hello World\nThis is a sample markdown text.'],
         optional: false,
+        properties: {
+          rawMarkdown: {
+            description: "The raw markdown text can go here",
+            type: "string",
+            examples: ['# Hello World\nThis is a sample markdown text.'],
+            optional: false
+          },
+          "facets": {
+            "type": "array",
+            "items": {
+              "type": "ref",
+              "ref": "pub.leaflet.richtext.facet"
+            },
+            optional: true
+          }
+        }
+      },
+      textBlob: {
+        description: 'Text may be blob-ified as raw Markdown and stored on a PDS, pass it here by reference. If you use this property it is assumed that it overrides the `text` property',
+        "accept": [
+          "text/*"
+        ],
+        "maxSize": 1000000,
+        "type": "blob",
+        optional: true,
       },
       flavor: {
         description:
@@ -22,9 +47,9 @@ module.exports = [
         examples: ['GFM', 'CommonMark'],
         optional: false,
       },
-      preferredRenderer: {
+      renderingRules: {
         description:
-          "Different rendering systems for Markdown may introduce slight or significant changes to the resulting HTML. This setting allows you to specify your preferred renderer. Keep in mind that no consuming entity is obligated to honor this preference. Some examples might be `marked`, `pandoc`, `markdown-it` `mdxt`, etc. Generally, this lexicon assumes that you are pulling the Markdown from an existing site that includes an existing rendering process. The processor used for that process to build your site's pages is the one you should include here. If you don\'t know then just leave this field out.",
+          "Different rendering systems for Markdown may introduce slight or significant changes to the resulting HTML. This setting allows you to specify your renderer so systems can understand the rules you expect. Keep in mind that no consuming entity is obligated to honor this preference. While rendering views may infer rules established by different Markdown renderers with this field, they can and should use the rendering system of their choice. Do **not** use rendering systems you don't know. Some examples might be `marked`, `pandoc`, `markdown-it` `mdxt`, etc. Generally, this lexicon assumes that you are pulling the Markdown from an existing site that includes an existing rendering process. The processor used for that process to build your site's pages is the one you should include here. If you don\'t know then just leave this field out.",
         type: 'string',
         examples: ['markdown-it'],
         optional: true,

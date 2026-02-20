@@ -1,4 +1,29 @@
+const markpubText = {
+  id: 'at.markpub.text',
+  description: 'Handles objects with Markdown text and potential describing facets.',
+  type: "object",
+  object: {
+    type: "object",
+    rawMarkdown: {
+      description: "The raw markdown text can go here",
+      type: "string",
+      examples: ['# Hello World\nThis is a sample markdown text.'],
+      optional: false
+    },
+    "facets": {
+      "type": "array",
+      description: "Facets here represent rendered versions of Markdown strings. A bold Markdown string `**bold**` might be represented by a richtext facet of #bold, in which case it is suggested to be presented without the Markdown markup as `<strong>bold</strong>`",
+      "items": {
+        "type": "ref",
+        "ref": "pub.leaflet.richtext.facet"
+      },
+      optional: true
+    }
+  }
+};
+
 module.exports = [
+  markpubText,
   {
     id: 'at.markpub.markdown',
     description:
@@ -9,26 +34,11 @@ module.exports = [
       text: {
         description:
           'Text in markdown. May include anything that is valid markdown syntax for your flavor. Make sure it is properly escaped if necessary.',
-        type: 'object',
+        type: 'ref',
         //examples: ['# Hello World\nThis is a sample markdown text.'],
         optional: false,
-        properties: {
-          rawMarkdown: {
-            description: "The raw markdown text can go here",
-            type: "string",
-            examples: ['# Hello World\nThis is a sample markdown text.'],
-            optional: false
-          },
-          "facets": {
-            "type": "array",
-            description: "Facets here represent rendered versions of Markdown strings. A bold Markdown string `**bold**` might be represented by a richtext facet of #bold, in which case it is suggested to be presented without the Markdown markup as `<strong>bold</strong>",
-            "items": {
-              "type": "ref",
-              "ref": "pub.leaflet.richtext.facet"
-            },
-            optional: true
-          }
-        }
+        ref: markpubText.id
+
       },
       textBlob: {
         description: 'Text may be blob-ified as raw Markdown and stored on a PDS, pass it here by reference. If you use this property it is assumed that it overrides the `text` property',

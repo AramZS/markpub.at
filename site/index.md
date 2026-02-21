@@ -19,7 +19,7 @@ This is a quick intro to the `at.markpub.markdown` lexicon object for ATProto, i
 }
 ```
 
-## Used with [Standard.Site ](https://standard.site/)
+## Used with [Standard.Site](https://standard.site/)
 
 ```json
 {

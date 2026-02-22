@@ -1,3 +1,4 @@
+const footer = require("./partials/footer.11ty.js");
 
 module.exports = async function(data, zones) {
   // console.log("layout data", data);
@@ -11,10 +12,11 @@ module.exports = async function(data, zones) {
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1">
 		<title>${data.title || data.site.title}</title>
-    <description>${data.description || data.site.description}</description>
+    <meta name="description" content="${data.description || data.site.description}">
     <script>
 		window.pageData = {};
 		</script>
+    <link rel="stylesheet" href="/assets/css/basic.css">
     <style>
       pre {
         max-width: 900px;
@@ -37,6 +39,8 @@ module.exports = async function(data, zones) {
 	<body>
 		<div id="inner-body">
       ${zones?.innerBody ? zones.innerBody : zones.content}
+		</div>
+    ${await footer(data, zones)}
 	</body>
 </html>`;
 };

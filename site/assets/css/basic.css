@@ -1,0 +1,10 @@
+footer {
+  text-align: center;
+}
+
+footer .bluesky-logo {
+  width: 0.8em;
+  height: 0.8em;
+  margin: 0 0.1em;
+  display: inline-block;
+}

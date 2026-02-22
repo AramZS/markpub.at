@@ -5,6 +5,13 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addShortcode(shortCodeName, shortcodes[shortCodeName]);
   });
 
+  Object.keys(shortcodes).forEach((shortCodeName) => {
+    eleventyConfig.addPairedShortcode(shortCodeName, shortcodes[shortCodeName]);
+  });
+
+  //Passthroughs
+  eleventyConfig.addPassthroughCopy("site/assets/css", "assets/css");
+
   return {
     dir: {
       input: 'site',

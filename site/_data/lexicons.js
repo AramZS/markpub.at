@@ -1,3 +1,55 @@
+
+
+const facetExamples = [
+  {
+    index: {
+      byteStart: 0,
+      byteEnd: 20
+    },
+    features: [
+      {
+        $type: 'at.markpub.baseFormattingFacets#header',
+        level: 1
+      },
+      {
+        $type: 'at.markpub.baseFormattingFacets#idify',
+      }
+    ]
+  },
+  {
+    index: {
+      byteStart: 86,
+      byteEnd: 102
+    },
+    features: [
+      {
+        $type: 'at.markpub.baseFormattingFacets#strong',
+      },
+    ]
+  },
+  {
+    index: {
+      byteStart: 6,
+      byteEnd: 15
+    },
+    features: [{
+      $type: 'app.bsky.richtext.facet#link',
+      uri: 'https://example.com'
+    }]
+  },
+  {
+    index: {
+      byteStart: 208,
+      byteEnd: 223
+    },
+    features: [{
+      $type: 'pub.leaflet.richtext.facet#underline'
+    }]
+  }
+];
+
+console.log('facet examples', JSON.stringify(facetExamples, null, 2));
+
 const markpubText = {
   id: 'at.markpub.text',
   description: 'Handles objects with Markdown text and potential describing facets.',
@@ -12,17 +64,18 @@ const markpubText = {
     },
     "facets": {
       "type": "array",
-      description: "Facets here represent rendered versions of Markdown strings. A bold Markdown string `**bold**` might be represented by a richtext facet of #bold, in which case it is suggested to be presented without the Markdown markup as `<strong>bold</strong>. Facets select their character ranges based on position in the Markdown text but should be rendered without the related characters. For example: \"### Header\" will be selected using a character range that includes the hashes like (0,9) but will be rendered without the hashes like \"<h3>Header</h3>\". It is recommended that processors to not transform in-place for this reason. The goal of having an open union for facets is that constructing systems may choose to use the facets they prefer from across the ecosystem, either here or in other places like \"pub.leaflet.richtext.facet\"`",
+      description: "Facets here represent rendered versions of Markdown strings. A bold Markdown string `**bold**` might be represented by a richtext facet of #bold, in which case it is suggested to be presented without the Markdown markup as `&lt;strong&gt;bold&lt;/strong&gt;`. Facets select their character ranges based on position in the Markdown text but should be rendered without the related characters. For example: `### Header` will be selected using a character range that includes the hashes like (0,9) but will be rendered without the hashes like `&lt;h3&gt;Header&lt;/h3&gt;`. It is recommended that processors to not transform in-place for this reason. The goal of having an open union for facets is that constructing systems may choose to use the facets they prefer from across the ecosystem, either here or in other places like `pub.leaflet.richtext.facet`",
       "items": {
         "type": "union",
         "closed": "false",
         "refs": []
       },
+      examples: facetExamples.map(facet => JSON.stringify(facet)),
       optional: true
     },
     lenses: {
       type: "array",
-      description: "Lenses are lexicons that define translatable facets for rendering layers with limited facets. \"pub.leaflet.richtext.facet#bold\" and \"at.markpub.facet#strong\" expect the same output. A lens would then include a union with both those facets and a renderer that understands either of them could translate between the two.",
+      description: "Lenses are lexicons that define translatable facets for rendering layers with limited facets. `pub.leaflet.richtext.facet#bold` and `at.markpub.facet#strong` expect the same output. A lens would then include a union with both those facets and a renderer that understands either of them could translate between the two.",
       items: {
         "type": "union",
         "closed": "false",
@@ -50,12 +103,14 @@ const sliceFacetsMarkpub = {
         "type": "union",
         "refs": [
           "#strong",
+          "#header",
+          "#idify"
         ]
       }
     },
     "byteSlice": {
       "type": "object",
-      "description": "Specifies the sub-string range a facet feature applies to. Start index is inclusive, end index is exclusive. Indices are zero-indexed, counting bytes of the UTF-8 encoded text. NOTE: some languages, like Javascript, use UTF-16 or Unicode codepoints for string slice indexing; in these languages, convert to byte arrays before working with facets.",
+      "description": "Specifies the sub-string range a facet feature applies to. Start index is inclusive, end index is exclusive. Indices are zero-indexed, counting bytes of the UTF-8 encoded text. NOTE: some languages, like Javascript, use UTF-16 or Unicode codepoints for string slice indexing; in these languages, convert to byte arrays before working with facets. Byte slices can overlap.",
       "required": [
         "byteStart",
         "byteEnd"
@@ -73,13 +128,32 @@ const sliceFacetsMarkpub = {
     },
     "strong": {
       "type": "object",
-      "description": "Facet feature for a <strong> HTML tag. For the byteSlice provided it should surround the underlying text.",
+      "description": "Facet feature for a `&lt;strong&gt;` HTML tag. For the byteSlice provided it should surround the underlying text.",
+      "required": [],
+      "properties": {
+      },
+    },
+    "header": {
+      "type": "object",
+      "description": "Facet feature for a `&lt;h1&gt;` HTML tag. The integer is the level you want to use, as in h1, h2, h3, etc... For the byteSlice provided it should surround the underlying text.",
+      "required": ["level"],
+      "properties": {
+        "level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 6
+        }
+      }
+    },
+    "idify": {
+      "type": "object",
+      "description": "Facet feature instructs parsers to stringify the underlying text and include it as an id property on an HTML element. If this overlaps with an existing HTML tag generated by another facet, it is assumed that it will be applied to that tag. If there is no matching tag, use `&lt;span&gt;&lt;/span&gt;`. It is expected spaces are turned into hyphens. For example, a header facet with an idify feature might produce `&lt;h1 id=\"header-text\"&gt;Header Text&lt;/h1&gt;`.",
       "required": [],
       "properties": {
       }
     },
   }
-}
+};
 
 const blockFacet = {
   lexicon: 1,
@@ -112,7 +186,8 @@ const lens = {
       },
       outputTargetHTML: {
         optional: true,
-        examples: ["<strong></strong>", "<a>"]
+        type: "string",
+        examples: ["&lt;strong&gt;&lt;/strong&gt;", "&lt;a&gt;"]
       }
     }
   }
@@ -174,6 +249,6 @@ module.exports = [
   },
   markpubText,
   sliceFacetsMarkpub,
-  blockFacet,
+  // blockFacet,
   lens
 ];

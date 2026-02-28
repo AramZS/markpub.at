@@ -1,10 +1,38 @@
 
 
+
+const exampleMarkdownText = '# Hello World\nThis is a sample markdown text.'
+
+const getBytePosition = (rawText, startChar, breakChar, charIndex) => {
+
+  // Convert to UTF-8 bytes
+  const encoder = new TextEncoder();
+  const totalBytes = encoder.encode(rawText);
+
+  // Find the newline position to determine where the header ends
+  const text = rawText;
+  const sequenceStart = text.indexOf(startChar); // This gives character position
+  const sequenceEnd = text.indexOf(breakChar); // This gives character position
+
+  // For the header "# Hello World" (excluding the newline):
+  const selectedText = text.substring(sequenceStart, sequenceEnd);
+  const headerBytes = encoder.encode(selectedText);
+
+  const byteStart = encoder.encode(text.substring(0, sequenceStart)).length; // This gives byte position of the start of the header
+  const byteEnd = byteStart + headerBytes.length; // This gives byte position of the end of the header
+
+  console.log('Selected text:', selectedText);
+  console.log('byteStart:', byteStart);
+  console.log('byteEnd:', byteEnd);
+  console.log('Total bytes in header:', byteEnd - byteStart);
+  return { byteStart, byteEnd, totalBytes };
+}
+let headerByteData = getBytePosition(exampleMarkdownText, '#', '\n');
 const facetExamples = [
   {
     index: {
-      byteStart: 0,
-      byteEnd: 20
+      byteStart: headerByteData.byteStart,
+      byteEnd: headerByteData.byteEnd
     },
     features: [
       {
@@ -59,7 +87,7 @@ const markpubText = {
     rawMarkdown: {
       description: "The raw markdown text can go here",
       type: "string",
-      examples: ['# Hello World\nThis is a sample markdown text.'],
+      examples: [exampleMarkdownText],
       optional: false
     },
     "facets": {
@@ -79,7 +107,8 @@ const markpubText = {
       items: {
         "type": "union",
         "closed": "false",
-        "refs": []
+        "refs": [],
+        "examples": []
       },
       optional: true
     }
@@ -157,7 +186,37 @@ const sliceFacetsMarkpub = {
 
 const blockFacet = {
   lexicon: 1,
-  id: "at.markpub.baseBlocks"
+  id: "at.markpub.baseBlocks",
+  type: 'object',
+  description: "A block facet is a facet intended to insert an HTML element before a specific single byte index in the text. This is useful for things like line breaks, dividers, or any other element that doesn't have a clear character range to apply to. It can be thought of as a point annotation rather than a range annotation like the slice facets. Where a range is specified with a start and end index, the intention is to replace that text with the target element.",
+  object: {
+    type: 'object',
+    "byteSlice": {
+      "type": "object",
+      "description": "Specifies the sub-string range a facet feature applies to. Start index is inclusive, end index is exclusive. Indices are zero-indexed, counting bytes of the UTF-8 encoded text. NOTE: some languages, like Javascript, use UTF-16 or Unicode codepoints for string slice indexing; in these languages, convert to byte arrays before working with facets. Byte slices can overlap.",
+      "required": [
+        "byteStart",
+        "byteEnd"
+      ],
+      "properties": {
+        "byteStart": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "byteEnd": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "horizontalRule": {
+      "type": "object",
+      "description": "Place an `&lt;hr&gt;` element at the provided byte index.",
+      "required": [],
+      "properties": {
+      }
+    },
+  }
 }
 
 const lens = {
@@ -167,28 +226,33 @@ const lens = {
   description: 'Use this lens to specify facets that can be interoperable.',
   object: {
     type: 'object',
-    object: {
-      outputDescription: {
-        optional: true
+    outputDescription: {
+      optional: true,
+      type: "string",
+      description: "A human-readable description of what the output of this lens is intended to be. This is optional but can be helpful for documentation purposes and for anyone trying to understand how to use the lens.",
+      examples: ["This lens outputs bold or strong styling on web text."]
+    },
+    "facets": {
+      description: "A list of facet types that this lens can translate between. For example, if you include `pub.leaflet.richtext.facet#bold` and `at.markpub.facet#strong` then this lens can be used to translate between those two facet types and any renderer that understands either of those facet types can use this lens to render the facets it understands.",
+      "type": "array",
+      "items": {
+        "type": "union",
+        "closed": "false",
+        "refs": [],
+        examples: ['["at.markpub.facet#strong", "pub.leaflet.richtext.facet#bold"]']
       },
-      "facets": {
-        description: "",
-        "type": "array",
-        "items": {
-          "type": "union",
-          "closed": "false",
-          "refs": []
-        },
-        optional: false
-      },
-      outputCode: {
-        optional: true
-      },
-      outputTargetHTML: {
-        optional: true,
-        type: "string",
-        examples: ["&lt;strong&gt;&lt;/strong&gt;", "&lt;a&gt;"]
-      }
+      optional: false
+    },
+    outputCode: {
+      "description": "You may include code here intended to process a string with the provided facets. This is optional and not expected to be used by most lenses, but it can be helpful for testing or for providing examples of how a renderer might use the lens.",
+      "type": "string",
+      examples: ["function renderWithLens(text, facets) { /* code to render text with facets */ }"],
+      optional: true
+    },
+    outputTargetHTML: {
+      optional: true,
+      type: "string",
+      examples: ["&lt;strong&gt;&lt;/strong&gt;", "&lt;a&gt;"]
     }
   }
 }
@@ -211,12 +275,13 @@ module.exports = [
 
       },
       textBlob: {
-        description: 'Text may be blob-ified as raw Markdown and stored on a PDS, pass it here by reference. If you use this property it is assumed that it overrides the `text` property',
+        description: 'Text may be blob-ified as raw Markdown and stored on a PDS, pass it here by reference. If you use this property it is assumed that it overrides the `text` property. It is a PDS address for a text file.',
         "accept": [
-          "text/*"
+          "text/*",
         ],
         "maxSize": 1000000,
         "type": "blob",
+        "examples": [],
         optional: true,
       },
       flavor: {
@@ -249,6 +314,6 @@ module.exports = [
   },
   markpubText,
   sliceFacetsMarkpub,
-  // blockFacet,
+  blockFacet,
   lens
 ];

@@ -1,6 +1,6 @@
 ---
 title: Markpub.at Markdown Lexicon
-description: Providing Lexicon for putting Markdown in the ATmosphere.
+description: Providing a Lexicon for putting Markdown in the ATmosphere.
 layout: index.11ty.js
 ---
 
@@ -56,4 +56,4 @@ This is a quick intro to the `at.markpub.markdown` lexicon object for ATProto, i
 }
 ```
 
-[Give feedback on Github](https://github.com/AramZS/markpub.at)!
+[Give feedback on Github](https://github.com/AramZS/markpub.at) or on [Bluesky](https://bsky.app/profile/markpubat.bsky.social)!

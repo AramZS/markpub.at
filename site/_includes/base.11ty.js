@@ -1,3 +1,4 @@
+const footer = require("./partials/footer.11ty.js");
 
 module.exports = async function(data, zones) {
   // console.log("layout data", data);
@@ -11,10 +12,11 @@ module.exports = async function(data, zones) {
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1">
 		<title>${data.title || data.site.title}</title>
-    <description>${data.description || data.site.description}</description>
+    <meta name="description" content="${data.description || data.site.description}">
     <script>
 		window.pageData = {};
 		</script>
+    <link rel="stylesheet" href="/assets/css/basic.css">
     <style>
       pre {
         max-width: 900px;
@@ -23,6 +25,10 @@ module.exports = async function(data, zones) {
         white-space: pre-wrap;
       }
     </style>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 		${zones.earlyHead || ''}
 		${templateStyle}
 		${zones.lateHead || ''}
@@ -37,6 +43,8 @@ module.exports = async function(data, zones) {
 	<body>
 		<div id="inner-body">
       ${zones?.innerBody ? zones.innerBody : zones.content}
+		</div>
+    ${await footer(data, zones)}
 	</body>
 </html>`;
 };

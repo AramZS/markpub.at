@@ -12,7 +12,7 @@ This set of Lexicons is intended to give the most flexibility to put Markdown in
 
 The goal is not for this to be an independent record, but rather to be inside other records that support passing an object to describe your text. 
 
-This Lexicon is not yet published but still [taking feedback, you can do so via GitHub](https://github.com/AramZS/markpub.at).
+This Lexicon is not yet published but still [taking feedback, you can do so via GitHub](https://github.com/AramZS/markpub.at). The current update was published at Feb 28 2026 (8:15PM EST).
 
 The lexicons supply all the tools to make it as clear as possible how to render your Markdown, but also extremely simple to do the basics to get your Markdown into the ATmosphere. Here's an example of the most minimal version of the object, to place in your Standard.Site document or elsewhere: 
 

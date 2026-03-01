@@ -338,6 +338,13 @@ module.exports = [
         examples: ['["LaTeX","YAML"]', '["YAML"]'],
         optional: true,
       },
+      "frontMatter": {
+        "type": "object",
+        "description": "If your markdown includes a front matter block, you can include it here as separate text. This is optional but may be more convenient for some systems to have it separate. It is expected that if you include this field that the front matter block is not included in the raw markdown text field.",
+        "type": "string",
+        examples: ['---\ntitle: Hello World\nauthor: Aram Zucker-Scharff\n---'],
+        optional: true,
+      }
     },
   },
   markpubText,

@@ -5,8 +5,11 @@ module.exports = async function(data) {
   let zones = {
     innerBody: `${data.content}
 
-      <h2>Lexicon:</h2>
-      <pre><code class="language.json">${data.lexicons ? this.processLexs(data.lexicons) : ''}</code></pre>
+      <h2>Lexicons:</h2>
+      <pre><code class="language.json">${data.lexicons ? this.processLexs(data.lexicons, 'h3') : ''}</code></pre>
+
+      <a id="examples"></a>
+      ${data.lexicons ? this.getAllExampleOutput(data.lexicons, '2') : ''}
     `
   }
   return base(data, zones);

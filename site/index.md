@@ -67,11 +67,11 @@ Scroll down to see the <a href="#lexicons" class="skip-link">lexicons</a> and mo
             },
             "features": [
                 {
-                "$type": "at.markpub.baseFormattingFacets#header",
+                "$type": "at.markpub.facets.baseFormatting#header",
                 "level": 1
                 },
                 {
-                "$type": "at.markpub.baseFormattingFacets#idify"
+                "$type": "at.markpub.facets.baseFormatting#idify"
                 }
             ]
             },

@@ -4,9 +4,29 @@ description: Providing a Lexicon for putting Markdown in the ATmosphere.
 layout: index.11ty.js
 ---
 
-# Hello
+# Hello, here's the Markpub.at Markdown Lexicon
 
 This is a quick intro to the `at.markpub.markdown` lexicon object for ATProto, intended to have a well-formatted way to put Markdown on your PDS. 
+
+This set of Lexicons is intended to give the most flexibility to put Markdown into any larger document like Standard.Site. It gives you options to use YAML, to upload your Markdown as a Blob in storage on your PDS, or specify formatting using supplied facets, or any facets you choose. 
+
+The goal is not for this to be an independent record, but rather to be inside other records that support passing an object to describe your text. 
+
+This Lexicon is not yet published but still [taking feedback, you can do so via GitHub](https://github.com/AramZS/markpub.at).
+
+The lexicons supply all the tools to make it as clear as possible how to render your Markdown, but also extremely simple to do the basics to get your Markdown into the ATmosphere. Here's an example of the most minimal version of the object, to place in your Standard.Site document or elsewhere: 
+
+```json
+{
+  "$type": "at.markpub.markdown",
+  "text": {
+    "$type": "at.markpub.text",
+    "rawMarkdown": "# Hello World\nThis is a sample markdown text.",
+    "flavor": "commonmark",
+    "renderingRules": "markdown-it"
+  }
+}
+```
 
 ## Used with [Standard.Site](https://standard.site/)
 
@@ -15,9 +35,9 @@ This is a quick intro to the `at.markpub.markdown` lexicon object for ATProto, i
     "$type": "site.standard.document",
     "publishedAt": "2024-06-08T10:00:00.000Z",
     "site": "at://did:plc:t5xmf33p5kqgkbznx22p7d7g/site.standard.publication/3mbrgnnqzrr2q",
-    "path": "/essays/the-internet-is-a-series-of-webs/",
-    "title": "The Internet is a Series of Webs",
-    "description": "The fate of the open web is inextricable from the other ways our world is in crisis. What can we do about it?",
+    "path": "/essays/hello-world/",
+    "title": "Hello World!",
+    "description": "Markdown is less simple than it seems.",
     "coverImage": {
         "$type": "blob",
         "ref": {
@@ -26,7 +46,7 @@ This is a quick intro to the `at.markpub.markdown` lexicon object for ATProto, i
         "mimeType": "image/jpeg",
         "size": 347901
       },
-    "textContent": "<textContent>",
+    "textContent": "Hello World\nThis is a sample markdown text.",
     "content": {
         "$type": "at.markpub.markdown",
         "flavor": "gfm",
@@ -72,7 +92,7 @@ This is a quick intro to the `at.markpub.markdown` lexicon object for ATProto, i
         "uri": "at://did:plc:t5xmf33p5kqgkbznx22p7d7g/app.bsky.feed.post/3kulbtuuixs27",
         "cid": "bafyreigh7yods3ndrmqeq55cjisda6wi34swt7s6kkduwcotkgq5g5y2oe"
     },
-    "tags": ["IndieWeb", "Tech", "The Long Next", "series:The Wild Web"],
+    "tags": ["IndieWeb", "Tech", "The Long Next"],
     "updatedAt":"2024-06-08T10:30:00.000Z"
 
 }

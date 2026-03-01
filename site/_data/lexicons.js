@@ -3,6 +3,18 @@
 
 const exampleMarkdownText = '# Hello World\nThis is a sample markdown text.'
 
+/**
+ * Grab byte positions for text to process. 
+ * 
+ * This is useful for determining the exact byte positions of specific text segments within a larger text, which is important for generating your facets. Facets rely on byte positions to accurately identify the segments of text they apply to, especially when dealing with multi-byte characters or complex markdown syntax. By providing the raw text along with the character index and the start and break characters, you can calculate the byte positions needed for your facets to function correctly.
+ *
+ * @param   {[type]}  rawText    The Raw Text you are processing. In order to get accurate byte positions you need to provide the full raw text including any markdown syntax. 
+ * @param   {[type]}  startChar  The character to start selection at. For example, if you want to select a header you might start with the `#` character.
+ * @param   {[type]}  breakChar  The character to end selection at. For example, if you want to select a header you might end with the newline character `\n`.
+ * @param   {[type]}  charIndex  The character index to start selection at. This is used to calculate the byte position accurately. Important if you are selecting the `##` header for example, there may be more than one of these in the document and you need to specify which you are selecting @TODO: implement this. 
+ *
+ * @return  {[type]}             An object containing the byte start and end positions, as well as the total bytes in the text.
+ */
 const getBytePosition = (rawText, startChar, breakChar, charIndex) => {
 
   // Convert to UTF-8 bytes
@@ -27,6 +39,7 @@ const getBytePosition = (rawText, startChar, breakChar, charIndex) => {
   console.log('Total bytes in header:', byteEnd - byteStart);
   return { byteStart, byteEnd, totalBytes };
 }
+
 let headerByteData = getBytePosition(exampleMarkdownText, '#', '\n');
 const facetExamples = [
   {
@@ -36,11 +49,11 @@ const facetExamples = [
     },
     features: [
       {
-        $type: 'at.markpub.baseFormattingFacets#header',
+        $type: 'at.markpub.facets.baseFormatting#header',
         level: 1
       },
       {
-        $type: 'at.markpub.baseFormattingFacets#idify',
+        $type: 'at.markpub.facets.baseFormatting#idify',
       }
     ]
   },
@@ -51,7 +64,7 @@ const facetExamples = [
     },
     features: [
       {
-        $type: 'at.markpub.baseFormattingFacets#strong',
+        $type: 'at.markpub.facets.baseFormatting#strong',
       },
     ]
   },
@@ -85,10 +98,20 @@ const markpubText = {
   object: {
     type: "object",
     rawMarkdown: {
-      description: "The raw markdown text can go here",
+      description: "The raw text in markdown. May include anything that is valid markdown syntax for your flavor. Make sure it is properly escaped if necessary.",
       type: "string",
       examples: [exampleMarkdownText],
       optional: false
+    },
+    textBlob: {
+      description: `Text may be blob-ified as raw Markdown and stored on a PDS, pass it here by reference. If you use this property it is assumed that it overrides the "rawMarkdown" property. It is a PDS address for a markdown text file. You still must provide some value, even if it is a preview for "rawMarkdown" in this field.`,
+      "accept": [
+        "text/*",
+      ],
+      "maxSize": 1000000,
+      "type": "blob",
+      "examples": [],
+      optional: true,
     },
     "facets": {
       "type": "array",
@@ -103,7 +126,7 @@ const markpubText = {
     },
     lenses: {
       type: "array",
-      description: "Lenses are lexicons that define translatable facets for rendering layers with limited facets. `pub.leaflet.richtext.facet#bold` and `at.markpub.facet#strong` expect the same output. A lens would then include a union with both those facets and a renderer that understands either of them could translate between the two.",
+      description: "Lenses are lexicons that define translatable facets for rendering layers with limited facets. `pub.leaflet.richtext.facet#bold` and `at.markpub.facets.baseFormatting#strong` expect the same output. A lens would then include a union with both those facets and a renderer that understands either of them could translate between the two.",
       items: {
         "type": "union",
         "closed": "false",
@@ -117,7 +140,7 @@ const markpubText = {
 
 const sliceFacetsMarkpub = {
   lexicon: 1,
-  id: "at.markpub.baseFormattingFacets",
+  id: "at.markpub.facets.baseFormatting",
   description: "",
   type: "object",
   object: {
@@ -186,7 +209,7 @@ const sliceFacetsMarkpub = {
 
 const blockFacet = {
   lexicon: 1,
-  id: "at.markpub.baseBlocks",
+  id: "at.markpub.facets.baseBlocks",
   type: 'object',
   description: "A block facet is a facet intended to insert an HTML element before a specific single byte index in the text. This is useful for things like line breaks, dividers, or any other element that doesn't have a clear character range to apply to. It can be thought of as a point annotation rather than a range annotation like the slice facets. Where a range is specified with a start and end index, the intention is to replace that text with the target element.",
   object: {
@@ -216,8 +239,23 @@ const blockFacet = {
       "properties": {
       }
     },
+    "yaml-front-matter": {
+      "type": "object",
+      "description": "Identify a block of front matter at the top of the Markdown block. It is expected that this has a byteStart and byteEnd.",
+      "required": [],
+      "properties": {
+      }
+    },
+    "raw": {
+      "type": "object",
+      "description": "Place raw text at the provided byte index. This is a powerful escape hatch for anything that can't be achieved with the other facet features, but use it with caution as it can easily break things if used incorrectly. Do not expect systems to render it.",
+      "required": [
+      ],
+      "properties": {
+      }
+    }
   }
-}
+};
 
 const lens = {
   lexicon: 1,
@@ -233,13 +271,13 @@ const lens = {
       examples: ["This lens outputs bold or strong styling on web text."]
     },
     "facets": {
-      description: "A list of facet types that this lens can translate between. For example, if you include `pub.leaflet.richtext.facet#bold` and `at.markpub.facet#strong` then this lens can be used to translate between those two facet types and any renderer that understands either of those facet types can use this lens to render the facets it understands.",
+      description: "A list of facet types that this lens can translate bidirectionally between. For example, if you include `pub.leaflet.richtext.facet#bold` and `at.markpub.facet#strong` then this lens can be used to translate between those two facet types and any renderer that understands either of those facet types can use this lens to render the facets it understands.",
       "type": "array",
       "items": {
         "type": "union",
         "closed": "false",
         "refs": [],
-        examples: ['["at.markpub.facet#strong", "pub.leaflet.richtext.facet#bold"]']
+        examples: ['["at.markpub.facets.baseFormatting#strong", "pub.leaflet.richtext.facet#bold"]']
       },
       optional: false
     },
@@ -267,22 +305,12 @@ module.exports = [
       type: 'object',
       text: {
         description:
-          'Text in markdown. May include anything that is valid markdown syntax for your flavor. Make sure it is properly escaped if necessary.',
+          'An object that includes the text in markdown. May include anything that is valid markdown syntax for your flavor. Make sure it is properly escaped if necessary.',
         type: 'ref',
         //examples: ['# Hello World\nThis is a sample markdown text.'],
         optional: false,
         ref: markpubText.id
 
-      },
-      textBlob: {
-        description: 'Text may be blob-ified as raw Markdown and stored on a PDS, pass it here by reference. If you use this property it is assumed that it overrides the `text` property. It is a PDS address for a text file.',
-        "accept": [
-          "text/*",
-        ],
-        "maxSize": 1000000,
-        "type": "blob",
-        "examples": [],
-        optional: true,
       },
       flavor: {
         description:
@@ -295,14 +323,14 @@ module.exports = [
       },
       renderingRules: {
         description:
-          "Different rendering systems for Markdown may introduce slight or significant changes to the resulting HTML. This setting allows you to specify your renderer so systems can understand the rules you expect. Keep in mind that no consuming entity is obligated to honor this preference. While rendering views may infer rules established by different Markdown renderers with this field, they can and should use the rendering system of their choice. Do **not** use rendering systems you don't know. Some examples might be `marked`, `pandoc`, `markdown-it` `mdxt`, etc. Generally, this lexicon assumes that you are pulling the Markdown from an existing site that includes an existing rendering process. The processor used for that process to build your site's pages is the one you should include here. If you don\'t know then just leave this field out.",
+          "Using this field is highly suggested. Different rendering systems for Markdown may introduce slight or significant changes to the resulting HTML. This setting allows you to specify your renderer so systems can understand the rules you expect. Keep in mind that no consuming entity is obligated to honor this preference. While rendering views may infer rules established by different Markdown renderers with this field, they can and should use the rendering system of their choice. Do **not** use rendering systems you don't know. Some examples might be `marked`, `pandoc`, `markdown-it` `mdxt`, etc. Generally, this lexicon assumes that you are pulling the Markdown from an existing site that includes an existing rendering process. The processor used for that process to build your site's pages is the one you should include here. If you don\'t know then just leave this field out.",
         type: 'string',
         examples: ['markdown-it'],
         optional: true,
       },
       extensions: {
         description:
-          'The Markdown community expects certain extensions to mainline Markdown flavors. This setting allows you to note to a renderer what extensions might be expected. The most common is LaTeX. Rendering systems may choose to render these extensions in a variety of ways or present them raw. It is not required that you include YAML in the text field itself, if you choose to, note it in this field.',
+          'The Markdown community expects certain extensions to mainline Markdown flavors. This setting allows you to note to a renderer what extensions might be expected. The most common is LaTeX. Rendering systems may choose to render these extensions in a variety of ways or present them raw. It is not required that you include YAML in the markdown text itself, if you choose to include a YAML metadata block, note it in this field.',
         type: 'array',
         items: {
           type: 'string',

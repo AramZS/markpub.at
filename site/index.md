@@ -28,6 +28,8 @@ The lexicons supply all the tools to make it as clear as possible how to render 
 }
 ```
 
+Scroll down to see the <a href="#lexicons" class="skip-link">lexicons</a> and more detailed <a href="#examples" class="skip-link">examples</a> 
+
 ## Used with [Standard.Site](https://standard.site/)
 
 ```json
@@ -99,3 +101,4 @@ The lexicons supply all the tools to make it as clear as possible how to render 
 ```
 
 [Give feedback on Github](https://github.com/AramZS/markpub.at) or on [Bluesky](https://bsky.app/profile/markpubat.bsky.social)!
+<a id="lexicons">

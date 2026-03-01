@@ -8,6 +8,7 @@ module.exports = async function(data) {
       <h2>Lexicons:</h2>
       <pre><code class="language.json">${data.lexicons ? this.processLexs(data.lexicons, 'h3') : ''}</code></pre>
 
+      <a id="examples"></a>
       ${data.lexicons ? this.getAllExampleOutput(data.lexicons, '2') : ''}
     `
   }

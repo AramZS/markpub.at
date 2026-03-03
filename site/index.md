@@ -64,7 +64,7 @@ Scroll down to see the <a href="#lexicons" class="skip-link">lexicons</a> and mo
         "size": 347901
       },
     "textContent": "Hello World\nThis is a sample markdown text.",
-    "content": {
+    "content": [{
         "$type": "at.markpub.markdown",
         "flavor": "gfm",
         "renderingRules": "markdown-it",
@@ -103,7 +103,7 @@ Scroll down to see the <a href="#lexicons" class="skip-link">lexicons</a> and mo
                 }
             ]
         }
-    },
+    }],
     "bskyPostRef": {
         "$type": "com.atproto.repo.strongRef",
         "uri": "at://did:plc:t5xmf33p5kqgkbznx22p7d7g/app.bsky.feed.post/3kulbtuuixs27",

@@ -75,32 +75,32 @@ Scroll down to see the <a href="#lexicons" class="skip-link">lexicons</a> and mo
         "text": {
             "$type": "at.markpub.text",
             "markdown": "# Hello World\nThis is a sample markdown text.",
-            "facets": {
-            "index": {
-                "byteStart": 0,
-                "byteEnd": 13
-            },
-            "features": [
-                {
-                "$type": "at.markpub.facets.baseFormatting#header",
-                "level": 1
+            "facets": [{
+                "index": {
+                    "byteStart": 0,
+                    "byteEnd": 13
                 },
-                {
-                "$type": "at.markpub.facets.baseFormatting#idify"
-                }
-            ]
-            },
+                "features": [
+                    {
+                    "$type": "at.markpub.facets.baseFormatting#header",
+                    "level": 1
+                    },
+                    {
+                    "$type": "at.markpub.facets.baseFormatting#idify"
+                    }
+                ]
+            }],
             "lenses": [
-            {
-                "$type": "at.markpub.lens",
-                "outputDescription": "This lens outputs bold or strong styling on web text.",
-                "facets": [
-                "at.markpub.facet#strong",
-                "pub.leaflet.richtext.facet#bold"
-                ],
-                "outputCode": "function renderWithLens(text, facets) { /* code to render text with facets */ }",
-                "outputTargetHTML": "<strong></strong>"
-            }
+                {
+                    "$type": "at.markpub.lens",
+                    "outputDescription": "This lens outputs bold or strong styling on web text.",
+                    "facets": [
+                        {"$type": "at.markpub.facets.baseFormatting#strong"}, 
+                        {"$type":"pub.leaflet.richtext.facet#bold"}
+                    ],
+                    "outputCode": "function renderWithLens(text, facets) { /* code to render facets  */ }",
+                    "outputTargetHTML": "<strong></strong>"
+                }
             ]
         }
     },

@@ -277,7 +277,7 @@ const lens = {
         "type": "union",
         "closed": false,
         "refs": [],
-        examples: ['["at.markpub.facets.baseFormatting#strong", "pub.leaflet.richtext.facet#bold"]']
+        examples: ['[{"$type": "at.markpub.facets.baseFormatting#strong"}, {"$type":"pub.leaflet.richtext.facet#bold"}]']
       },
       optional: false
     },

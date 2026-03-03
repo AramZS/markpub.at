@@ -16,7 +16,20 @@ This Lexicon is not yet published but still [taking feedback, you can do so via 
 
 The lexicons supply all the tools to make it as clear as possible how to render your Markdown, but also extremely simple to do the basics to get your Markdown into the ATmosphere. Here's two examples of the most minimal version of the object, to place in your Standard.Site document or elsewhere: 
 
+Smallest possible: 
+
+```json
+{
+  "$type": "at.markpub.markdown",
+  "text": {
+    "$type": "at.markpub.text",
+    "markdown": "# Hello World\nThis is a sample markdown text."
+  }
+}
+```
+
 A little extra information for renderers:
+
 
 ```json
 {
@@ -26,18 +39,6 @@ A little extra information for renderers:
     "markdown": "# Hello World\nThis is a sample markdown text.",
     "flavor": "commonmark",
     "renderingRules": "markdown-it"
-  }
-}
-```
-
-Smallest possible: 
-
-```json
-{
-  "$type": "at.markpub.markdown",
-  "text": {
-    "$type": "at.markpub.text",
-    "markdown": "# Hello World\nThis is a sample markdown text."
   }
 }
 ```

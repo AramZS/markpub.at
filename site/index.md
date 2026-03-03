@@ -14,16 +14,30 @@ The goal is not for this to be an independent record, but rather to be inside ot
 
 This Lexicon is not yet published but still [taking feedback, you can do so via GitHub](https://github.com/AramZS/markpub.at). The current update was published at Feb 28 2026 (8:15PM EST).
 
-The lexicons supply all the tools to make it as clear as possible how to render your Markdown, but also extremely simple to do the basics to get your Markdown into the ATmosphere. Here's an example of the most minimal version of the object, to place in your Standard.Site document or elsewhere: 
+The lexicons supply all the tools to make it as clear as possible how to render your Markdown, but also extremely simple to do the basics to get your Markdown into the ATmosphere. Here's two examples of the most minimal version of the object, to place in your Standard.Site document or elsewhere: 
+
+A little extra information for renderers:
 
 ```json
 {
   "$type": "at.markpub.markdown",
   "text": {
     "$type": "at.markpub.text",
-    "rawMarkdown": "# Hello World\nThis is a sample markdown text.",
+    "markdown": "# Hello World\nThis is a sample markdown text.",
     "flavor": "commonmark",
     "renderingRules": "markdown-it"
+  }
+}
+```
+
+Smallest possible: 
+
+```json
+{
+  "$type": "at.markpub.markdown",
+  "text": {
+    "$type": "at.markpub.text",
+    "markdown": "# Hello World\nThis is a sample markdown text."
   }
 }
 ```
@@ -59,7 +73,7 @@ Scroll down to see the <a href="#lexicons" class="skip-link">lexicons</a> and mo
         ],
         "text": {
             "$type": "at.markpub.text",
-            "rawMarkdown": "# Hello World\nThis is a sample markdown text.",
+            "markdown": "# Hello World\nThis is a sample markdown text.",
             "facets": {
             "index": {
                 "byteStart": 0,

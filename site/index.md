@@ -10,9 +10,9 @@ This is a quick intro to the `at.markpub.markdown` lexicon object for ATProto, i
 
 This set of Lexicons is intended to give the most flexibility to put Markdown into any larger document like Standard.Site. It gives you options to use YAML, to upload your Markdown as a Blob in storage on your PDS, or specify formatting using supplied facets, or any facets you choose. 
 
-The goal is not for this to be an independent record, but rather to be inside other records that support passing an object to describe your text. 
+The goal is not for this to be an independent record, but rather to be inside other records that support passing an object to describe your text. [In ATProto's terms this Lexicon is intended to be used in a property that is of type `union`](https://atproto.com/specs/lexicon#union). 
 
-This Lexicon is not yet published but still [taking feedback, you can do so via GitHub](https://github.com/AramZS/markpub.at). The current update was published at March 3 2026 (3:15AM EST).
+This Lexicon is not yet published but still [taking feedback, you can do so via GitHub](https://github.com/AramZS/markpub.at). The current update was published at March 12 2026 (4:45PM ET).
 
 The lexicons supply all the tools to make it as clear as possible how to render your Markdown, but also extremely simple to do the basics to get your Markdown into the ATmosphere. Here's two examples of the most minimal version of the object, to place in your Standard.Site document or elsewhere: 
 

@@ -97,7 +97,7 @@ const markpubText = {
   type: "object",
   object: {
     type: "object",
-    rawMarkdown: {
+    markdown: {
       description: "The raw text in markdown. May include anything that is valid markdown syntax for your flavor. Make sure it is properly escaped if necessary.",
       type: "string",
       examples: [exampleMarkdownText],
@@ -118,7 +118,7 @@ const markpubText = {
       description: "Facets here represent rendered versions of Markdown strings. A bold Markdown string `**bold**` might be represented by a richtext facet of #bold, in which case it is suggested to be presented without the Markdown markup as `&lt;strong&gt;bold&lt;/strong&gt;`. Facets select their character ranges based on position in the Markdown text but should be rendered without the related characters. For example: `### Header` will be selected using a character range that includes the hashes like (0,9) but will be rendered without the hashes like `&lt;h3&gt;Header&lt;/h3&gt;`. It is recommended that processors to not transform in-place for this reason. The goal of having an open union for facets is that constructing systems may choose to use the facets they prefer from across the ecosystem, either here or in other places like `pub.leaflet.richtext.facet`",
       "items": {
         "type": "union",
-        "closed": "false",
+        "closed": false,
         "refs": []
       },
       examples: facetExamples.map(facet => JSON.stringify(facet)),
@@ -129,7 +129,7 @@ const markpubText = {
       description: "Lenses are lexicons that define translatable facets for rendering layers with limited facets. `pub.leaflet.richtext.facet#bold` and `at.markpub.facets.baseFormatting#strong` expect the same output. A lens would then include a union with both those facets and a renderer that understands either of them could translate between the two.",
       items: {
         "type": "union",
-        "closed": "false",
+        "closed": false,
         "refs": [],
         "examples": []
       },
@@ -275,9 +275,9 @@ const lens = {
       "type": "array",
       "items": {
         "type": "union",
-        "closed": "false",
+        "closed": false,
         "refs": [],
-        examples: ['["at.markpub.facets.baseFormatting#strong", "pub.leaflet.richtext.facet#bold"]']
+        examples: ['[{"$type": "at.markpub.facets.baseFormatting#strong"}, {"$type":"pub.leaflet.richtext.facet#bold"}]']
       },
       optional: false
     },
@@ -317,9 +317,8 @@ module.exports = [
           "Markdown may be rendered in many flavors. The most common are CommonMark and Github Flavored Markdown (GFM). Generally your markdown is one of those two and if you don't know then it is likely CommonMark. At this time the lexicon only recognizes these two flavors. Submit a PR if you think one should be added.",
         type: 'string',
         knownValues: ['gfm', 'commonmark'],
-        default: 'commonmark',
         examples: ['gfm', 'commonmark'],
-        optional: false,
+        optional: true,
       },
       renderingRules: {
         description:
@@ -339,10 +338,22 @@ module.exports = [
         optional: true,
       },
       "frontMatter": {
-        "type": "object",
-        "description": "If your markdown includes a front matter block, you can include it here as separate text. This is optional but may be more convenient for some systems to have it separate. It is expected that if you include this field that the front matter block is not included in the raw markdown text field.",
-        "type": "string",
-        examples: ['---\ntitle: Hello World\nauthor: Aram Zucker-Scharff\n---'],
+        "description": "If your markdown includes a front matter block, you can include it here as a set of objects describing the data. This is optional but may be more convenient for some systems to have it separate. It is expected that if you include this field that the front matter block is not included in the raw markdown text field. It would likely be parsed out of a YAML block and transformed into this array of objects or an array holding a single object.",
+        "type": "array",
+        "items": {
+          "type": "union",
+          "closed": false,
+          "refs": []
+        },
+        examples: [[{
+          title: "Hello World",
+          author: "Aram Zucker-Scharff"
+        }],
+        [{
+          "@type": "org.schema.article",
+          headline: "Hello World",
+          "atproto:feed": "at://did:plc:abc123xyz456/app.bsky.feed.generator/atproto-news"
+        }]],
         optional: true,
       }
     },

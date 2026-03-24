@@ -1,5 +1,5 @@
 ---
-title: "Contrasts"
+title: "Lexicon"
 layout: lex.11ty.js
 pagination:
   data: lexicons

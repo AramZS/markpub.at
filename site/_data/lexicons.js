@@ -131,8 +131,8 @@ const markpubText = {
         "type": "union",
         "closed": false,
         "refs": [],
-        "examples": []
       },
+      "examples": [],
       optional: true
     }
   }

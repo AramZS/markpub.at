@@ -1,5 +1,23 @@
 # Bluesky 
-http://markdown.markpub.at/* https://markpub.at/lexicons/at.markpub.markdown.json 301!
+http://markdown.markpub.at/markdown https://markpub.at/lexicons/at.markpub.markdown.json 301!
+http://markdown.markpub.at/markdown/ https://markpub.at/lexicons/at.markpub.markdown.json 301!
+http://markdown.markpub.at/markdown.json https://markpub.at/lexicons/at.markpub.markdown.json 301!
+
+http://markdown.markpub.at/lens https://markpub.at/lexicons/at.markpub.lens.json 301!
+http://markdown.markpub.at/lens/ https://markpub.at/lexicons/at.markpub.lens.json 301!
+http://markdown.markpub.at/lens.json https://markpub.at/lexicons/at.markpub.lens.json 301!
+
+http://markdown.markpub.at/text https://markpub.at/lexicons/at.markpub.text.json 301!
+http://markdown.markpub.at/text/ https://markpub.at/lexicons/at.markpub.text.json 301!
+http://markdown.markpub.at/text.json https://markpub.at/lexicons/at.markpub.text.json 301!
+
+http://markdown.markpub.at/facets/baseBlocks https://markpub.at/lexicons/at.markpub.facets.baseBlocks.json 301!
+http://markdown.markpub.at/facets/baseBlocks/ https://markpub.at/lexicons/at.markpub.facets.baseBlocks.json 301!
+http://markdown.markpub.at/facets/baseBlocks.json https://markpub.at/lexicons/at.markpub.facets.baseBlocks.json 301!
+
+http://markdown.markpub.at/facets/baseFormatting https://markpub.at/lexicons/at.markpub.facets.baseFormatting.json 301!
+http://markdown.markpub.at/facets/baseFormatting/ https://markpub.at/lexicons/at.markpub.facets.baseFormatting.json 301!
+http://markdown.markpub.at/facets/baseFormatting.json https://markpub.at/lexicons/at.markpub.facets.baseFormatting.json 301!
 
 # Feed
 /atom.xml /blog/feed.xml

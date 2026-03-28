@@ -41,7 +41,7 @@ module.exports = async function(data, zones) {
 
 	</head>
 	<body>
-  <div class="game-screen">
+  <div class="main-screen">
 
     <div class="sidebar__triangle-wrapper">
     <aside class="sidebar__triangle">
@@ -99,11 +99,11 @@ module.exports = async function(data, zones) {
 
   </svg>
 </aside>
- 
-    <!-- ══════════════════════════════════
-         CHECKERBOARD STRIP — Decorative
-         ══════════════════════════════════ -->
-    <div class="checker-strip checker-strip--footer" aria-hidden="true"></div>
+
+		<main id="inner-body">
+      ${zones?.innerBody ? zones.innerBody : zones.content}
+		</main>
+    ${await footer(data, zones)}
  
     <!-- ══════════════════════════════════
          MESSAGE BUTTON — Bottom left circle
@@ -120,6 +120,11 @@ module.exports = async function(data, zones) {
          INPUT AREA - for text input
          ══════════════════════════════════ -->
     <div class="dialog-box" role="region" aria-label="Input Area">
+ 
+    <!-- ══════════════════════════════════
+         CHECKERBOARD STRIP — Decorative
+         ══════════════════════════════════ -->
+    <div class="checker-strip checker-strip--footer" aria-hidden="true"></div>
       <p class="dialog-box__text" id="dialog-text" contenteditable="true" spellcheck="false" aria-multiline="true">
         Enter your markdown here to see how it works.
       </p>
@@ -149,10 +154,6 @@ module.exports = async function(data, zones) {
       autoBtn.setAttribute('aria-pressed', String(isActive));
     });
   </script>
-		<div id="inner-body">
-      ${zones?.innerBody ? zones.innerBody : zones.content}
-		</div>
-    ${await footer(data, zones)}
 	</body>
 </html>`;
 };

@@ -27,7 +27,7 @@ color one
 /* ── Design Tokens ─────────────────────────────────────────── */
 :root {
   /* Core Palette */
-  --color-black: #080000;
+  --color-black: #111;
   --color-deep-gray: #1a1a1a;
   --color-mid-gray: rgb(66, 32, 30);
   --color-mid-gray-fade: rgb(66, 32, 30, 0.2);
@@ -41,7 +41,7 @@ color one
   --color-alert: #e03030;
 
   /* Dialogue Box */
-  --dialog-bg: rgba(0, 0, 0, 0.82);
+  --dialog-bg: var(--color-deep-gray);
   --dialog-border: var(--color-white);
   --dialog-text: #ffffff;
 
@@ -90,23 +90,31 @@ body {
   font-family: var(--font-dialog);
 }
 
-/* ── Layout: Game Screen Wrapper ────────────────────────────── */
-.game-screen {
+/* ── Layout: Main Screen Wrapper ────────────────────────────── */
+.main-screen {
   position: relative;
-  width: 100%;
-  max-width: 1440px;
-  aspect-ratio: 16 / 9;
-  background-color: #111;
-  margin: 0 auto;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  background-color: var(--color-black);
+  margin: 0 0;
+}
+
+#inner-body {
+  position: relative;
+  width: calc(100% - 100px);
+  height: calc(100% - 100px);
+  left: 100px;
+  padding: 0;
 }
 
 /* ── Sidebar (Left) — Icon Rail ─────────────────────────────── */
 .sidebar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 90px;
-  height: 100%;
+  height: 100vh;
   background-color: var(--sidebar-bg);
   display: flex;
   flex-direction: column;
@@ -165,8 +173,8 @@ body {
 }
 
 .sidebar__triangle {
-  width: 182px;
-  height: 160px;
+  width: 205px;
+  height: 180px;
   background-color: var(--color-foreground);
   clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
   z-index: 12;
@@ -178,8 +186,6 @@ body {
 }
 
 .sidebar__icon {
-  width: 48px;
-  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -189,12 +195,8 @@ body {
   transition:
     transform 0.15s ease,
     opacity 0.15s ease;
-}
-
-.sidebar__icon {
   width: 50%;
   height: 50%;
-  margin: 10%;
   margin-left: 10px;
   background-color: var(--color-foreground);
   cursor: pointer;
@@ -204,7 +206,7 @@ body {
 }
 
 .sidebar__icon-img {
-  width: 100%;
+  max-height: 100%;
   fill: black;
   margin-top: 10px;
   filter: brightness(0);
@@ -263,7 +265,7 @@ body {
 } */
 
 .hud {
-  position: absolute;
+  position: fixed;
   top: 12px;
   right: 12px;
   top: -4px;
@@ -335,18 +337,19 @@ body {
 
 /* ── Dialogue Box ────────────────────────────────────────────── */
 .dialog-box {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   background-color: var(--dialog-bg);
   border-top: 3px solid var(--dialog-border);
   padding: 22px 120px 22px 160px;
-  z-index: 30;
+  z-index: 5;
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: 90px;
+  overflow: visible;
 }
 
 .dialog-box__text {
@@ -444,20 +447,14 @@ body {
     var(--checker-color-a) 0% 25%,
     var(--checker-color-b) 0% 50%
   );
+  position: absolute;
   background-size: 18px 18px;
   width: 100%;
   height: 18px;
-  z-index: 0;
-}
-
-/* Placed at bottom of sidebar / dialogue transition zone */
-.checker-strip--footer {
-  position: absolute;
-  bottom: 90px;
-  left: 90px;
   right: 0;
-  z-index: 9;
+  z-index: 4;
   opacity: 0.55;
+  margin-top: -110px;
 }
 
 /* ── Utility Classes ─────────────────────────────────────────── */

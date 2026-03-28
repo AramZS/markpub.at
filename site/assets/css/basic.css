@@ -66,8 +66,8 @@ color one
 
   /* Typography */
   --font-hud: "Rajdhani", "Bebas Neue", "Impact", sans-serif;
-  --font-dialog: "Noto Sans", "Segoe UI", system-ui, sans-serif;
-  --font-label: "Oswald", "Rajdhani", sans-serif;
+  --font-dialog: "Iosevka Etoile Web", "Segoe UI", system-ui, sans-serif;
+  --font-label: "Oswald", sans-serif;
 
   /* Spacing */
   --radius-sm: 3px;
@@ -84,10 +84,32 @@ color one
   padding: 0;
 }
 
+a {
+  color: var(--color-off-white);
+}
+
+.rajdhani-bold {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+html {
+  scroll-padding-top: 84px; /* for anchored links to avoid being hidden behind fixed header */
+}
+
 body {
   background-color: var(--color-black);
   color: var(--color-white);
-  font-family: var(--font-dialog);
+  font-family: sans-serif;
+}
+
+p {
+  margin-bottom: 1.5em;
+}
+
+pre {
+  margin-bottom: 1.5em;
 }
 
 /* ── Layout: Main Screen Wrapper ────────────────────────────── */
@@ -101,9 +123,12 @@ body {
 
 #inner-body {
   position: relative;
-  margin-left: 100px;
-  width: calc(100% - 100px);
+  margin-left: 122px;
+  width: calc(100% - 122px);
   padding: 0;
+  padding-bottom: 110px;
+  padding-right: 60px;
+  max-width: 920px;
 }
 
 /* ── Sidebar (Left) — Icon Rail ─────────────────────────────── */
@@ -190,6 +215,17 @@ body {
   display: inline-block;
 }
 
+header > h1 {
+  margin-left: 228px;
+  margin-bottom: 62px;
+  margin-top: 26px;
+  display: block;
+  padding-right: 56px;
+  border-bottom: var(--color-accent-dark) solid 8px;
+  padding-bottom: 8px;
+  font-size: 65px;
+}
+
 .sidebar__icon {
   display: flex;
   align-items: center;
@@ -208,6 +244,39 @@ body {
   transition: opacity 0.15s ease;
   flex-shrink: 0;
   border: 0;
+}
+
+.sidebar-item-set {
+  bottom: 90px;
+  position: absolute;
+  left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sidebar-item {
+  position: relative;
+  z-index: 15;
+  width: 36px;
+  color: var(--color-black);
+  background: transparent;
+  max-width: 100%;
+  align-self: flex-start;
+}
+
+.sidebar-item > *,
+.sidebar-item a {
+  margin: 0 auto;
+  color: var(--color-black);
+  text-align: center;
+  display: block;
+}
+
+.sidebar-item a:hover {
+  filter: drop-shadow(2px 2px 0px var(--color-off-white))
+    drop-shadow(-2px -2px 0px var(--color-off-white));
+  z-index: 11;
 }
 
 .sidebar__icon-img {
@@ -235,7 +304,7 @@ body {
 .nameplate {
   position: absolute;
   left: 10px;
-  top: 60%;
+  top: 56%;
   transform: translateY(-50%) rotate(180deg);
   writing-mode: vertical-rl;
   background-color: var(--nameplate-bg);
@@ -389,14 +458,14 @@ body {
 
 /* ── Message Button (Bottom Left) ───────────────────────────── */
 .msg-btn {
-  position: absolute;
-  bottom: 20px;
-  left: 100px;
-  width: 52px;
-  height: 52px;
+  position: fixed;
+  bottom: 24px;
+  left: 44px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background-color: var(--color-deep-gray);
-  border: 3px solid var(--color-white);
+  border: 3px solid var(--color-foreground);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -409,7 +478,7 @@ body {
 
 .msg-btn:hover {
   background-color: var(--color-mid-gray);
-  border-color: var(--color-foreground);
+  border-color: var(--color-accent);
 }
 
 .msg-btn__icon {
@@ -420,7 +489,7 @@ body {
 
 /* ── AUTO badge (Bottom Right) ──────────────────────────────── */
 .hide-badge {
-  position: absolute;
+  position: fixed;
   bottom: 14px;
   right: 14px;
   background-color: var(--color-foreground);
@@ -459,7 +528,7 @@ body {
   right: 0;
   z-index: 4;
   opacity: 0.55;
-  margin-top: -110px;
+  top: -16px;
 }
 
 /* ── Utility Classes ─────────────────────────────────────────── */
@@ -521,6 +590,71 @@ body {
   background: linear-gradient(to right, transparent, var(--color-black));
 }
 
+.hljs,
+.hljs-subst {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #282a36;
+}
+
+.hljs-built_in,
+.hljs-selector-tag,
+.hljs-section,
+.hljs-link {
+  color: #8be9fd;
+}
+
+.hljs-keyword {
+  color: #ff79c6;
+}
+
+.hljs-title,
+.hljs-attr,
+.hljs-meta-keyword {
+  font-style: italic;
+  color: #50fa7b;
+}
+
+.hljs-string,
+.hljs-meta,
+.hljs-name,
+.hljs-type,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition,
+.hljs-variable,
+.hljs-template-tag,
+.hljs-template-variable {
+  color: #f1fa8c;
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-deletion {
+  color: #6272a4;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-title,
+.hljs-section,
+.hljs-doctag,
+.hljs-type,
+.hljs-name,
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-literal,
+.hljs-number {
+  color: #bd93f9;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
 /* ── Responsive Scale ────────────────────────────────────────── */
 @media (max-width: 768px) {
   .dialog-box {

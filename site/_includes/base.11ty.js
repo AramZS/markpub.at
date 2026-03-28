@@ -16,6 +16,7 @@ module.exports = async function(data, zones) {
     <script>
 		window.pageData = {};
 		</script>
+    <link rel="stylesheet" href="/assets/css/fonts.css">
     <link rel="stylesheet" href="/assets/css/basic.css">
     <style>
       pre {
@@ -39,6 +40,16 @@ module.exports = async function(data, zones) {
       plausible.init()
     </script>
 
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+
+    <!-- and it's easy to individually load additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/json.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+
 	</head>
 	<body>
   <div class="main-screen">
@@ -51,7 +62,7 @@ module.exports = async function(data, zones) {
             </button>
         </aside>
       </div>
-      <h1>${data.contentTitle}</h1>
+      <h1 class="rajdhani-bold">${data.contentTitle}</h1>
     </header>
     <aside class="sidebar" aria-label="Sidebar controls">
       
@@ -59,8 +70,31 @@ module.exports = async function(data, zones) {
     <div class="nameplate" aria-label="Site name">
        <h1 class="nameplate__title">${data.site.titleShort}</h1>
     </div>
-
-    <div><p>src</p></div>
+    <div class="sidebar-item-set">
+      <div class="sidebar-item">
+        <a href="https://bsky.app/profile/markpub.at" target="_blank"><svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-auto"><path d="M4.335 2.18556C6.62833 3.90639 9.09417 7.39639 10 9.26972C10.9058 7.39722 13.3717 3.90639 15.665 2.18556C17.3192 0.943056 20 -0.0177777 20 3.04056C20 3.65056 19.65 8.17056 19.4442 8.90472C18.7308 11.4556 16.1292 12.1064 13.815 11.7131C17.86 12.4014 18.8892 14.6814 16.6667 16.9622C12.4458 21.2922 10.6 15.8756 10.1275 14.4872C10.0408 14.2331 10.0008 14.1139 10 14.2147C10 14.1139 9.95833 14.2331 9.8725 14.4872C9.39917 15.8756 7.55417 21.2922 3.33333 16.9622C1.11083 14.6814 2.14 12.4014 6.185 11.7122C3.87083 12.1064 1.26917 11.4556 0.555833 8.90472C0.35 8.17139 0 3.65056 0 3.04056C0 -0.0177777 2.68083 0.943056 4.335 2.18556Z" fill="currentColor"></path></svg></a>
+      </div>
+      <div class="sidebar-item" style="height: 20px;">
+        <a href="https://github.com/AramZS/markpub.at" target="_blank">
+          <p>src</p>
+        </a>
+      </div>
+      <div class="sidebar-item"><a href="https://standard.site" target="_blank"><svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="size-7 text-base-content"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.7848 0.065714C13.9147 -0.0219047 14.0853 -0.0219047 14.2152 0.065714C14.3672 0.16831 14.4487 1.17325 14.6113 3.18324L14.6679 3.88175H18.5308C21.5884 3.88179 24.067 6.36063 24.067 9.41828V10.3728H22.1579V9.41828C22.1579 7.415 20.5341 5.79089 18.5308 5.79086H14.8257C14.9975 7.72432 15.1695 8.84869 15.6731 9.76909C16.2205 10.7696 17.0392 11.5976 18.0361 12.1592C19.167 12.7962 20.6187 12.9381 23.522 13.2213L25.1166 13.3766C26.9289 13.5534 27.8355 13.6419 27.9364 13.793C28.0224 13.9222 28.0211 14.0905 27.933 14.2184C27.83 14.368 26.9222 14.4423 25.107 14.5906L24.067 14.6755V18.5819C24.0669 21.6396 21.5884 24.1181 18.5308 24.1182H14.6632L14.6113 24.7719C14.4489 26.8111 14.3676 27.831 14.2155 27.9342C14.0855 28.0219 13.9148 28.0219 13.7848 27.9342C13.6327 27.8315 13.5514 26.8117 13.389 24.7719L13.3368 24.1182H9.36726C6.30968 24.1181 3.83082 21.6395 3.83079 18.5819V17.6274H5.73987V18.5819C5.73991 20.5852 7.36404 22.209 9.36726 22.209H13.1814C13.0072 20.202 12.8353 19.0446 12.3157 18.1037C11.7575 17.0929 10.9223 16.2602 9.90699 15.7024C8.75503 15.0696 7.27799 14.9489 4.32422 14.7075L2.89302 14.5906C1.07778 14.4423 0.170021 14.368 0.0669912 14.2184C-0.0210463 14.0905 -0.0224419 13.9222 0.0635733 13.793C0.164352 13.6418 1.07092 13.5534 2.88339 13.3766L3.83079 13.284V9.41828C3.83079 6.36064 6.30966 3.8818 9.36726 3.88175H13.3324L13.389 3.18324C13.5515 1.17355 13.6328 0.168553 13.7848 0.065714ZM22.1579 14.8352C20.1779 15.0125 19.0285 15.1887 18.0933 15.7024C17.0779 16.2602 16.2425 17.0929 15.6843 18.1037C15.1647 19.0446 14.9928 20.202 14.8186 22.209H18.5308C20.534 22.209 22.1578 20.5852 22.1579 18.5819V14.8352ZM9.36726 5.79086C7.36401 5.7909 5.73987 7.41501 5.73987 9.41828V13.0957C7.82821 12.8811 9.01013 12.6965 9.96385 12.1592C10.9608 11.5976 11.7795 10.7696 12.3269 9.76909C12.8305 8.84869 13.0028 7.72433 13.1746 5.79086H9.36726Z" fill="currentColor"></path></svg></a></div>
+      <div class="sidebar-item"><a href="https://aramzs.nexus" target="_blank"><img src="assets/imgs/zs-favicon-32x32.png" /></a></div>
+      <div class="sidebar-item">
+        <a href="https://bsky.app/profile/chronotope.aramzs.xyz" target="_blank">
+        <svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <mask id="my-mask">
+            <!-- White = visible, black = hidden -->
+            <path d="M4.335 2.18556C6.62833 3.90639 9.09417 7.39639 10 9.26972C10.9058 7.39722 13.3717 3.90639 15.665 2.18556C17.3192 0.943056 20 -0.0177777 20 3.04056C20 3.65056 19.65 8.17056 19.4442 8.90472C18.7308 11.4556 16.1292 12.1064 13.815 11.7131C17.86 12.4014 18.8892 14.6814 16.6667 16.9622C12.4458 21.2922 10.6 15.8756 10.1275 14.4872C10.0408 14.2331 10.0008 14.1139 10 14.2147C10 14.1139 9.95833 14.2331 9.8725 14.4872C9.39917 15.8756 7.55417 21.2922 3.33333 16.9622C1.11083 14.6814 2.14 12.4014 6.185 11.7122C3.87083 12.1064 1.26917 11.4556 0.555833 8.90472C0.35 8.17139 0 3.65056 0 3.04056C0 -0.0177777 2.68083 0.943056 4.335 2.18556Z" fill="white" transform="scale(1.8)"></path>
+          </mask>
+        </defs>
+        <image href="assets/imgs/zs-favicon-32x32.png" width="36px" height="36px" mask="url(#my-mask)" />
+        </svg>
+        </a>
+      </div>
+    </div>
 
  
     <div class="sidebar__line" aria-hidden="true"></div>
@@ -104,13 +138,14 @@ module.exports = async function(data, zones) {
 
 		<main id="inner-body">
       ${zones?.innerBody ? zones.innerBody : zones.content}
+
+      ${await footer(data, zones)}
 		</main>
-    ${await footer(data, zones)}
  
     <!-- ══════════════════════════════════
          MESSAGE BUTTON — Bottom left circle
          ══════════════════════════════════ -->
-    <button class="msg-btn" aria-label="Open message log" title="Message log">
+    <button class="msg-btn" aria-label="Open Markdown Input" title="Markdown Input">
       <!-- Speech bubble icon -->
       <svg class="msg-btn__icon" xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 24 24" aria-hidden="true">

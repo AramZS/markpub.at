@@ -42,15 +42,17 @@ module.exports = async function(data, zones) {
 	</head>
 	<body>
   <div class="main-screen">
+    <header class="header-area">
+      <div class="sidebar__triangle-wrapper">
+        <aside class="sidebar__triangle">
+          <button class="sidebar__icon" aria-label="home" title="Home">
 
-    <div class="sidebar__triangle-wrapper">
-    <aside class="sidebar__triangle">
-      <button class="sidebar__icon" aria-label="home" title="Home">
-
-        <img src="/assets/imgs/markpubat-logo-transparent.png" alt="Home icon" class="sidebar__icon-img" aria-hidden="true">
-        </button>
-    </aside>
-    </div>
+            <img src="/assets/imgs/markpubat-logo-transparent.png" alt="Home icon" class="sidebar__icon-img" aria-hidden="true">
+            </button>
+        </aside>
+      </div>
+      <h1>${data.contentTitle}</h1>
+    </header>
     <aside class="sidebar" aria-label="Sidebar controls">
       
   
@@ -99,7 +101,6 @@ module.exports = async function(data, zones) {
 
   </svg>
 </aside>
-    <h1>${data.contentTitle}</h1>
 
 		<main id="inner-body">
       ${zones?.innerBody ? zones.innerBody : zones.content}

@@ -93,18 +93,16 @@ body {
 /* ── Layout: Main Screen Wrapper ────────────────────────────── */
 .main-screen {
   position: relative;
-  width: 100vw;
-  height: 100vh;
-  max-width: 100%;
+  width: 100%;
+  min-height: 100vh;
   background-color: var(--color-black);
-  margin: 0 0;
+  margin: 0;
 }
 
 #inner-body {
   position: relative;
+  margin-left: 100px;
   width: calc(100% - 100px);
-  height: calc(100% - 100px);
-  left: 100px;
   padding: 0;
 }
 
@@ -183,6 +181,13 @@ body {
 .sidebar__triangle-wrapper {
   filter: drop-shadow(4px 10px 6px var(--color-foreground-dark));
   z-index: 11;
+  width: fit-content;
+  position: fixed;
+}
+
+.header-area {
+  z-index: 10;
+  display: inline-block;
 }
 
 .sidebar__icon {

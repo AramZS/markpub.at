@@ -1,5 +1,6 @@
 let data = {
   title: "Markpub.at - ATProto Lexicons for handling Markdown",
+  titleShort: "Markpub.at",
   description:
     "A collection of ATProto lexicons for handling markdown content and metadata.",
   author: "Aram Zucker-Scharff",

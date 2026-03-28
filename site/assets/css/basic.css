@@ -8,3 +8,534 @@ footer .bluesky-logo {
   margin: 0 0.1em;
   display: inline-block;
 }
+
+/* ============================================================
+color one
+
+  --color-black: #0a0a0a;
+  --color-deep-gray: #1a1a1a;
+  --color-mid-gray: #2e2e2e;
+  --color-foreground: #f5c400;
+  --color-foreground-dark: #c79b00;
+  --color-foreground-light: #ffe066;
+  --color-white: #f0f0f0;
+  --color-off-white: #e8e2d4;
+  --color-accent: #e03030;
+
+   ============================================================ */
+
+/* ── Design Tokens ─────────────────────────────────────────── */
+:root {
+  /* Core Palette */
+  --color-black: #080000;
+  --color-deep-gray: #1a1a1a;
+  --color-mid-gray: rgb(66, 32, 30);
+  --color-mid-gray-fade: rgb(66, 32, 30, 0.2);
+  --color-foreground: rgb(255, 173, 63);
+  --color-foreground-dark: rgb(89, 63, 9); /* not accessible */
+  --color-foreground-light: rgb(252, 164, 91);
+  --color-white: #f0f0f0;
+  --color-off-white: rgb(26, 207, 253);
+  --color-accent: rgb(30, 179, 49);
+  --color-accent-dark: rgb(8, 110, 12);
+  --color-alert: #e03030;
+
+  /* Dialogue Box */
+  --dialog-bg: rgba(0, 0, 0, 0.82);
+  --dialog-border: var(--color-white);
+  --dialog-text: #ffffff;
+
+  /* HUD */
+  --hud-bg: rgba(20, 20, 20, 0.9);
+  --hud-border: var(--color-foreground);
+  --hud-label-color: var(--color-white);
+  --hud-value-color: var(--color-foreground);
+  --hud-accent: var(--color-accent);
+
+  /* Name Plate */
+  --nameplate-bg: var(--color-foreground);
+  --nameplate-text: var(--color-black);
+
+  /* Sidebar */
+  --sidebar-bg: var(--color-foreground);
+  --sidebar-icon-color: var(--color-black);
+
+  /* Checkerboard (decorative) */
+  --checker-color-a: #1a1a1a;
+  --checker-color-b: #2c2c2c;
+
+  /* Typography */
+  --font-hud: "Rajdhani", "Bebas Neue", "Impact", sans-serif;
+  --font-dialog: "Noto Sans", "Segoe UI", system-ui, sans-serif;
+  --font-label: "Oswald", "Rajdhani", sans-serif;
+
+  /* Spacing */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+}
+
+/* ── Base Reset ─────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--font-dialog);
+}
+
+/* ── Layout: Game Screen Wrapper ────────────────────────────── */
+.game-screen {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  aspect-ratio: 16 / 9;
+  background-color: #111;
+  margin: 0 auto;
+}
+
+/* ── Sidebar (Left) — Icon Rail ─────────────────────────────── */
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90px;
+  height: 100%;
+  background-color: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 0;
+  gap: 20px;
+  z-index: 10;
+  /* border-right: 4px solid var(--color-foreground-dark);
+  outline: 4px solid var(--color-accent); */
+
+  /* Triangle cut at top-right corner */
+  clip-path: polygon(
+    100% 100%,
+    /* top-left */ 100% 0%,
+    /* top-right */ 100% 120px,
+    /* start of diagonal */ 0% 200px,
+    /* end of diagonal */ 0% 100% /* bottom-left */
+  );
+  background: linear-gradient(
+    to bottom,
+    var(--color-mid-gray-fade) 16%,
+    var(--color-mid-gray) 20%,
+    var(--sidebar-bg) 30%
+  );
+}
+
+.sidebar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 16%,
+    var(--color-foreground-dark) 22%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.sidebar__line {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 14%,
+    var(--color-accent) 40%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.sidebar__triangle {
+  width: 182px;
+  height: 160px;
+  background-color: var(--color-foreground);
+  clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
+  z-index: 12;
+}
+
+.sidebar__triangle-wrapper {
+  filter: drop-shadow(4px 10px 6px var(--color-foreground-dark));
+  z-index: 11;
+}
+
+.sidebar__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sidebar-icon-color);
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.sidebar__icon {
+  width: 50%;
+  height: 50%;
+  margin: 10%;
+  margin-left: 10px;
+  background-color: var(--color-foreground);
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  flex-shrink: 0;
+  border: 0;
+}
+
+.sidebar__icon-img {
+  width: 100%;
+  fill: black;
+  margin-top: 10px;
+  filter: brightness(0);
+}
+
+.sidebar__icon:hover {
+  opacity: 0.75;
+}
+
+.sidebar__icon:hover .sidebar__icon-img {
+  filter: invert(25%) sepia(79%) saturate(1076%) hue-rotate(126deg)
+    brightness(60%) contrast(119%);
+}
+
+.sidebar__icon:hover {
+  transform: scale(1.15);
+  opacity: 0.75;
+}
+
+/* ── Name Plate (Left, Vertical) ────────────────────────────── */
+.nameplate {
+  position: absolute;
+  left: 10px;
+  top: 60%;
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  background-color: var(--nameplate-bg);
+  color: var(--nameplate-text);
+  font-family: var(--font-label);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 10px;
+  border-radius: var(--radius-sm);
+  z-index: 10;
+  white-space: nowrap;
+}
+
+/* ── HUD (Top Right) ────────────────────────────────────────── 
+.hud {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: var(--hud-bg);
+  border: 2px solid var(--hud-border);
+  border-radius: var(--radius-md);
+  padding: 8px 14px 8px 14px;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  column-gap: 8px;
+  row-gap: 2px;
+  z-index: 20;
+  min-width: 180px;
+} */
+
+.hud {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  top: -4px;
+  right: -60px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: var(--hud-bg);
+  border: 2px solid var(--hud-border);
+  display: block;
+  z-index: 20;
+  overflow: hidden;
+  padding: 0;
+  transform: rotate(-60deg);
+}
+
+.hud svg a {
+  text-decoration: none;
+}
+
+.hud svg a:hover tspan {
+  fill: var(--color-off-white);
+}
+
+.hud__label {
+  font-family: var(--font-hud);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hud-label-color);
+}
+
+.hud__value {
+  font-family: var(--font-hud);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--hud-value-color);
+  text-align: right;
+}
+
+.hud__value--accent {
+  color: var(--hud-accent);
+}
+
+/* HUD compass/icon ring */
+.hud__compass {
+  grid-column: 1 / -1;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid var(--color-foreground);
+  background: var(--color-deep-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px auto 0;
+  position: relative;
+}
+
+.hud__compass::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-foreground);
+}
+
+/* ── Dialogue Box ────────────────────────────────────────────── */
+.dialog-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--dialog-bg);
+  border-top: 3px solid var(--dialog-border);
+  padding: 22px 120px 22px 160px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 90px;
+}
+
+.dialog-box__text {
+  font-family: var(--font-dialog);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--dialog-text);
+  line-height: 1.5;
+  flex: 1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+/* Blinking cursor at end of text */
+.dialog-box__text::after {
+  content: "▼";
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 0.75em;
+  color: var(--color-foreground);
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ── Message Button (Bottom Left) ───────────────────────────── */
+.msg-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 100px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: var(--color-deep-gray);
+  border: 3px solid var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
+}
+
+.msg-btn:hover {
+  background-color: var(--color-mid-gray);
+  border-color: var(--color-foreground);
+}
+
+.msg-btn__icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--color-white);
+}
+
+/* ── AUTO badge (Bottom Right) ──────────────────────────────── */
+.hide-badge {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background-color: var(--color-foreground);
+  color: var(--color-black);
+  font-family: var(--font-hud);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  z-index: 40;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.hide-badge:hover {
+  background-color: var(--color-foreground-light);
+}
+
+.hide-badge.is-active {
+  background-color: var(--color-accent);
+  color: #fff;
+}
+
+/* ── Checkerboard Decorative Strip ──────────────────────────── */
+.checker-strip {
+  background-image: repeating-conic-gradient(
+    var(--checker-color-a) 0% 25%,
+    var(--checker-color-b) 0% 50%
+  );
+  background-size: 18px 18px;
+  width: 100%;
+  height: 18px;
+  z-index: 0;
+}
+
+/* Placed at bottom of sidebar / dialogue transition zone */
+.checker-strip--footer {
+  position: absolute;
+  bottom: 90px;
+  left: 90px;
+  right: 0;
+  z-index: 9;
+  opacity: 0.55;
+}
+
+/* ── Utility Classes ─────────────────────────────────────────── */
+.text-gold {
+  color: var(--color-foreground);
+}
+.text-accent {
+  color: var(--color-accent);
+}
+.text-upper {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.font-hud {
+  font-family: var(--font-hud);
+}
+.font-dialog {
+  font-family: var(--font-dialog);
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background-color: var(--sidebar-bg);
+  z-index: 10;
+  clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 100%);
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to right, transparent, var(--color-black));
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Two lines across the top of the footer, fading left */
+.footer__line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, transparent, var(--color-gold-dark));
+  z-index: 2;
+  pointer-events: none;
+}
+
+.footer__line--inner {
+  top: 4px;
+  background: linear-gradient(to right, transparent, var(--color-black));
+}
+
+/* ── Responsive Scale ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .dialog-box {
+    padding: 14px 60px 14px 80px;
+  }
+  .dialog-box__text {
+    font-size: 1rem;
+  }
+  .hud {
+    min-width: 130px;
+    font-size: 0.75rem;
+  }
+  .sidebar {
+    width: 60px;
+  }
+  .nameplate {
+    left: 60px;
+    font-size: 0.85rem;
+  }
+}

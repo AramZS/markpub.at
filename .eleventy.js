@@ -11,6 +11,7 @@ module.exports = function(eleventyConfig) {
 
   //Passthroughs
   eleventyConfig.addPassthroughCopy("site/assets/css", "assets/css");
+  eleventyConfig.addPassthroughCopy("site/assets/imgs", "assets/imgs");
   eleventyConfig.addPassthroughCopy({ "site/assets/favicon": "." });
 
   return {

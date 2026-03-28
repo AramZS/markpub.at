@@ -1,10 +1,9 @@
 ---
 title: Markpub.at Markdown Lexicon
+contentTitle: Hello, here's the Markpub.at Markdown Lexicon
 description: Providing a Lexicon for putting Markdown in the ATmosphere.
 layout: index.11ty.js
 ---
-
-# Hello, here's the Markpub.at Markdown Lexicon
 
 This is a quick intro to the `at.markpub.markdown` lexicon object for ATProto, intended to have a well-formatted way to put Markdown on your PDS. 
 

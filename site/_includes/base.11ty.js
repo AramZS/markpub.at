@@ -99,6 +99,7 @@ module.exports = async function(data, zones) {
 
   </svg>
 </aside>
+    <h1>${data.contentTitle}</h1>
 
 		<main id="inner-body">
       ${zones?.innerBody ? zones.innerBody : zones.content}

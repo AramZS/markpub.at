@@ -224,40 +224,18 @@ module.exports = async function(data, zones) {
     <div class="text-modal__inner">
       <button class="text-modal__close" aria-label="Close modal">✕</button>
       <pre class="text-modal__content" id="modal-content"></pre>
+      <br />
+      <p>It's just that simple!</p>
     </div>
   </dialog>
 
-  </div><!-- /.game-screen -->
+  </div>
  
  
   <!-- ══════════════════════════════════
        Minimal JS — AUTO toggle only
        ══════════════════════════════════ -->
-  <script>
-    const autoBtn = document.getElementById('hide-btn');
-    autoBtn.addEventListener('click', () => {
-      const isActive = autoBtn.classList.toggle('is-active');
-      document.body.classList.toggle('hide-markdown-input', isActive);
-      autoBtn.setAttribute('aria-pressed', String(isActive));
-      autoBtn.innerText = isActive ? 'Show Markdown Input' : 'Hide';
-    });
-
-    const grabBtn = document.getElementById('grab-input');
-    const textModal = document.getElementById('text-modal');
-    const modalContent = document.getElementById('modal-content');
-    const modalClose = textModal.querySelector('.text-modal__close');
-
-    grabBtn.addEventListener('click', () => {
-      modalContent.textContent = document.getElementById('dialog-text').innerText;
-      textModal.showModal();
-    });
-
-    modalClose.addEventListener('click', () => textModal.close());
-
-    textModal.addEventListener('click', (e) => {
-      if (e.target === textModal) textModal.close();
-    });
-  </script>
+  <script async src="/assets/scripts/main.js"></script>
 	</body>
 </html>`;
 };

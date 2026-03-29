@@ -896,6 +896,8 @@ header > h2 {
   max-width: min(720px, 90vw);
   max-height: 80vh;
   overflow: auto;
+  top: 30%;
+  margin: 0 auto;
 }
 
 .text-modal::backdrop {

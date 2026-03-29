@@ -15,6 +15,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("site/assets/css", "assets/css");
   eleventyConfig.addPassthroughCopy("site/assets/imgs", "assets/imgs");
   eleventyConfig.addPassthroughCopy("site/assets/fonts", "assets/fonts");
+  eleventyConfig.addPassthroughCopy("site/assets/scripts", "assets/scripts");
   eleventyConfig.addPassthroughCopy({ "site/assets/favicon": "." });
   // Load any languages you need
   hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));

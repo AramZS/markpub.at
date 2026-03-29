@@ -359,7 +359,7 @@ module.exports = [
     },
   },
   markpubText,
-  sliceFacetsMarkpub,
-  blockFacet,
+  //sliceFacetsMarkpub,
+  //blockFacet,
   lens
 ];

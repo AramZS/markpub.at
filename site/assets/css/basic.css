@@ -1,5 +1,6 @@
 footer {
   text-align: center;
+  font-size: smaller;
 }
 
 footer .bluesky-logo {
@@ -126,9 +127,24 @@ pre {
   margin-left: 122px;
   width: calc(100% - 122px);
   padding: 0;
-  padding-bottom: 110px;
+  padding-bottom: 140px;
   padding-right: 60px;
   max-width: 920px;
+  font-size: 1em;
+}
+
+#inner-body li {
+  margin-left: 1em;
+  margin-bottom: 1em;
+}
+
+#inner-body h1,
+#inner-body h2,
+#inner-body h3,
+#inner-body h4,
+#inner-body h5,
+#inner-body h6 {
+  margin-bottom: 1em;
 }
 
 /* ── Sidebar (Left) — Icon Rail ─────────────────────────────── */
@@ -215,7 +231,7 @@ pre {
   display: inline-block;
 }
 
-header > h1 {
+header > h2 {
   margin-left: 228px;
   margin-bottom: 62px;
   margin-top: 26px;
@@ -224,6 +240,7 @@ header > h1 {
   border-bottom: var(--color-accent-dark) solid 8px;
   padding-bottom: 8px;
   font-size: 65px;
+  margin-right: 40px;
 }
 
 .sidebar__icon {
@@ -298,6 +315,10 @@ header > h1 {
 .sidebar__icon:hover {
   transform: scale(1.15);
   opacity: 0.75;
+}
+
+.sidebar-item.src {
+  font-size: 18px;
 }
 
 /* ── Name Plate (Left, Vertical) ────────────────────────────── */
@@ -446,6 +467,10 @@ header > h1 {
   animation: blink 1s step-start infinite;
 }
 
+.hide-markdown-input .dialog-box {
+  display: none;
+}
+
 @keyframes blink {
   0%,
   100% {
@@ -476,6 +501,10 @@ header > h1 {
     background-color 0.2s;
 }
 
+.hide-markdown-input .msg-btn {
+  background-color: var(--color-foreground);
+}
+
 .msg-btn:hover {
   background-color: var(--color-mid-gray);
   border-color: var(--color-accent);
@@ -485,6 +514,10 @@ header > h1 {
   width: 24px;
   height: 24px;
   fill: var(--color-white);
+}
+
+.hide-markdown-input .msg-btn__icon {
+  fill: var(--color-black);
 }
 
 /* ── AUTO badge (Bottom Right) ──────────────────────────────── */
@@ -512,7 +545,10 @@ header > h1 {
 
 .hide-badge.is-active {
   background-color: var(--color-accent);
-  color: #fff;
+  scale: 80%;
+  right: -85px;
+  bottom: 90px;
+  transform: rotate(90deg);
 }
 
 /* ── Checkerboard Decorative Strip ──────────────────────────── */
@@ -655,23 +691,245 @@ header > h1 {
 .hljs-emphasis {
   font-style: italic;
 }
+
+.mobile-nav {
+  display: none;
+}
 /* ── Responsive Scale ────────────────────────────────────────── */
+
+@media (max-width: 1050px) {
+  #inner-body {
+  }
+
+  header > h2 {
+    margin-right: 120px;
+  }
+}
+
+/* ── Tablet (≤ 1024px) ──────────────────────────────────────── */
+@media (max-width: 1024px) {
+  #inner-body {
+    max-width: 740px;
+    padding-right: 40px;
+  }
+
+  header > h2 {
+    font-size: 48px;
+    margin-left: 170px;
+    margin-bottom: 44px;
+    margin-right: 100px;
+  }
+
+  .nameplate {
+    top: 49%;
+  }
+}
+
+/* ── Small Tablet (≤ 768px) ─────────────────────────────────── */
 @media (max-width: 768px) {
+  #inner-body {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+    padding-right: 24px;
+  }
+
+  header > h2 {
+    font-size: 36px;
+    margin-top: 60px;
+    margin-left: 140px;
+    margin-bottom: 32px;
+  }
+
   .dialog-box {
     padding: 14px 60px 14px 80px;
   }
+
   .dialog-box__text {
     font-size: 1rem;
   }
-  .hud {
-    min-width: 130px;
-    font-size: 0.75rem;
-  }
+
   .sidebar {
     width: 60px;
   }
-  .nameplate {
-    left: 60px;
-    font-size: 0.85rem;
+
+  .sidebar-item-set {
+    left: 4px;
   }
+
+  .msg-btn {
+    left: 10px;
+  }
+
+  .nameplate {
+    left: 0px;
+    font-size: 0.65rem;
+  }
+}
+
+/* ── Phone (≤ 480px) ────────────────────────────────────────── */
+@media (max-width: 480px) {
+  /* Sidebar collapses to a horizontal top rail */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 56px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 16px;
+    clip-path: none;
+    background: linear-gradient(
+      to right,
+      var(--color-mid-gray-fade) 15%,
+      var(--color-mid-gray) 18%,
+      var(--sidebar-bg) 30%
+    );
+  }
+
+  .sidebar::after,
+  .sidebar__line,
+  .nameplate {
+    display: none;
+  }
+
+  .sidebar__triangle-wrapper {
+    width: 93px;
+    top: 0;
+    left: 0;
+  }
+
+  .sidebar__triangle {
+    width: 100px;
+    height: 85px;
+  }
+
+  .sidebar__icon {
+    margin-left: 2px;
+  }
+
+  .sidebar-item-set {
+    position: static;
+    flex-direction: row;
+    gap: 16px;
+    bottom: auto;
+    left: auto;
+    margin-left: 110px;
+  }
+
+  .sidebar-item.src {
+    margin-top: 10px;
+  }
+
+  .sidebar-item.nexus img {
+    margin-top: 2px;
+  }
+  .mobile-nav {
+    display: block;
+    top: 56px;
+    height: 22px;
+    position: fixed;
+    background-color: var(--color-foreground-dark);
+    font-size: 12px;
+    right: 0;
+    width: 100%;
+    text-align: right;
+    padding-right: 80px;
+    background: linear-gradient(
+      to right,
+      var(--color-mid-gray-fade) 18%,
+      var(--color-mid-gray) 25%,
+      var(--color-foreground-dark) 40%
+    );
+  }
+
+  .mobile-nav li {
+    display: inline-block;
+    padding: 4px;
+  }
+
+  #inner-body {
+    margin-left: 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 16px 20px 120px;
+  }
+
+  header > h2 {
+    font-size: 26px;
+    margin-left: 16px;
+    margin-top: 88px; /* clear fixed sidebar rail */
+    margin-bottom: 20px;
+    padding-right: 16px;
+  }
+
+  html {
+    scroll-padding-top: 82px;
+  }
+
+  .dialog-box {
+    display: none;
+  }
+
+  .hud {
+    display: none;
+  }
+
+  .msg-btn {
+    display: none;
+  }
+
+  .hide-badge {
+    display: none;
+  }
+}
+
+/* ── Text Modal ─────────────────────────────────────────────── */
+.text-modal {
+  border: 2px solid var(--color-foreground);
+  border-radius: var(--radius-md);
+  background: var(--color-deep-gray);
+  color: var(--color-white);
+  padding: 0;
+  max-width: min(720px, 90vw);
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.text-modal::backdrop {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.text-modal__inner {
+  padding: 32px 36px 28px;
+  position: relative;
+}
+
+.text-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: var(--color-foreground);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.text-modal__close:hover {
+  color: var(--color-foreground-light);
+}
+
+.text-modal__content {
+  font-family: var(--font-dialog);
+  font-size: 1rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+  color: var(--color-white);
 }

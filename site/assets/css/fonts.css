@@ -43,6 +43,6 @@
   font-stretch: normal;
   font-style: normal;
   src:
-    url("assets/fonts/woff2/iosevka-etoile-semibold.woff2") format("woff2"),
-    url("assets/fonts/ttf/iosevka-etoile-semibold.ttf") format("truetype");
+    url("/assets/fonts/woff2/iosevka-etoile-semibold.woff2") format("woff2"),
+    url("/assets/fonts/ttf/iosevka-etoile-semibold.ttf") format("truetype");
 }

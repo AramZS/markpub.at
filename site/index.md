@@ -13,6 +13,8 @@ The goal is not for this to be an independent record, but rather to be inside ot
 
 The Lexicons here are published but still [taking feedback, you can do so via GitHub](https://github.com/AramZS/markpub.at). The current update was published at March 28 2026 (6:45PM ET).
 
+More questions? Check out our [FAQ](/faq).
+
 The lexicons supply all the tools to make it as clear as possible how to render your Markdown, but also extremely simple to do the basics to get your Markdown into the ATmosphere. Here's two examples of the most minimal version of the object, to place in your Standard.Site document or elsewhere: 
 
 Smallest possible: 

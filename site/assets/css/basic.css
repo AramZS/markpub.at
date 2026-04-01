@@ -340,6 +340,13 @@ header > h2 {
   white-space: nowrap;
 }
 
+@media (max-height: 890px) {
+  .nameplate {
+    font-size: 1.8vh;
+    top: 42%
+  }
+}
+
 /* ── HUD (Top Right) ────────────────────────────────────────── 
 .hud {
   position: absolute;
@@ -720,7 +727,7 @@ header > h2 {
   }
 
   .nameplate {
-    top: 49%;
+    top: 42%;
   }
 }
 

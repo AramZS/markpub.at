@@ -325,10 +325,9 @@ header > h2 {
 .nameplate {
   position: absolute;
   left: 10px;
-  top: 56%;
+  top: 45%;
   transform: translateY(-50%) rotate(180deg);
   writing-mode: vertical-rl;
-  background-color: var(--nameplate-bg);
   color: var(--nameplate-text);
   font-family: var(--font-label);
   font-size: 1.1rem;

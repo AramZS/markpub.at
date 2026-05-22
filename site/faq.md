@@ -33,7 +33,7 @@ Flavor is a common term in Markdown implementations that encompasses a set of ex
 
 Some of these seem catastrophic for rendering, but Markdown is intended to be both flexible and decomposable, so while not having rendered a table may look weird, the basic layout of a table is still there in the characters.
 
-THat said, it doesn't stop people from writing Markdown with the expectation that particular features might be there. A good example is an anchor link. If you write a long post you may link internally to other headings of the post via anchor links. If your Markdown tool provides these headings automatically you likely don't even think much about it. But that isn't some default for Markdown! 
+That said, it doesn't stop people from writing Markdown with the expectation that particular features might be there. A good example is an anchor link. If you write a long post you may link internally to other headings of the post via anchor links. If your Markdown tool provides these headings automatically you likely don't even think much about it. But that isn't some default for Markdown! 
 
 - `flavor` gives rendering surfaces a sense of the broad rendering style 
 - `renderingRules` meets the reality that no rendering system is really out there defining their tricks and tendencies, the only way to really know what the intended rendering system is will be to state the rendering system you use. 

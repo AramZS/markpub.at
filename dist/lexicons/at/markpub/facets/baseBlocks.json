@@ -1,0 +1,63 @@
+{
+  "lexicon": 1,
+  "id": "at.markpub.facets.baseBlocks",
+  "defs": {
+    "main": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "ref",
+          "ref": "#byteSlice"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "union",
+            "refs": [
+              "#horizontalRule",
+              "#yamlFrontMatter",
+              "#raw"
+            ]
+          }
+        }
+      },
+      "required": [
+        "index",
+        "features"
+      ]
+    },
+    "byteSlice": {
+      "description": "Specifies the sub-string range a facet feature applies to. Start index is inclusive, end index is exclusive. Indices are zero-indexed, counting bytes of the UTF-8 encoded text. NOTE: some languages, like Javascript, use UTF-16 or Unicode codepoints for string slice indexing; in these languages, convert to byte arrays before working with facets. Byte slices can overlap.",
+      "type": "object",
+      "properties": {
+        "byteStart": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "byteEnd": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "byteStart",
+        "byteEnd"
+      ]
+    },
+    "horizontalRule": {
+      "description": "Place an `&lt;hr&gt;` element at the provided byte index.",
+      "type": "object",
+      "properties": {}
+    },
+    "yamlFrontMatter": {
+      "description": "Identify a block of front matter at the top of the Markdown block. It is expected that this has a byteStart and byteEnd.",
+      "type": "object",
+      "properties": {}
+    },
+    "raw": {
+      "description": "Place raw text at the provided byte index. This is a powerful escape hatch for anything that can't be achieved with the other facet features, but use it with caution as it can easily break things if used incorrectly. Do not expect systems to render it.",
+      "type": "object",
+      "properties": {}
+    }
+  }
+}

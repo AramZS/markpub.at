@@ -99,7 +99,7 @@ Scroll down to see the <a href="#lexicons" class="skip-link">lexicons</a> and mo
                         {"$type": "at.markpub.facets.baseFormatting#strong"}, 
                         {"$type":"pub.leaflet.richtext.facet#bold"}
                     ],
-                    "outputCode": "function renderWithLens(text, facets) { /* code to render facets  */ }",
+                    "outputCode": "function renderWithLens(text, facets) { return `<strong>${test}</strong>` }",
                     "outputTargetHTML": "<strong></strong>"
                 }
             ]

@@ -11,7 +11,7 @@ This set of Lexicons is intended to give the most flexibility to put Markdown in
 
 The goal is not for this to be an independent record, but rather to be inside other records that support passing an object to describe your text. [In ATProto's terms this Lexicon is intended to be used in a property that is of type `union`](https://atproto.com/specs/lexicon#union). 
 
-The Lexicons here are published but still [taking feedback, you can do so via GitHub](https://github.com/AramZS/markpub.at). The current update was published at March 28 2026 (6:45PM ET).
+The Lexicons here are published but still [taking feedback, you can do so via GitHub](https://github.com/AramZS/markpub.at). The current update was published at June 26 2026 (11:45PM ET).
 
 More questions? Check out our [FAQ](/faq).
 

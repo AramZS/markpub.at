@@ -1,0 +1,35 @@
+{
+  "lexicon": 1,
+  "id": "at.markpub.lens",
+  "defs": {
+    "main": {
+      "type": "object",
+      "properties": {
+        "outputDescription": {
+          "description": "A human-readable description of what the output of this lens is intended to be. This is optional but can be helpful for documentation purposes and for anyone trying to understand how to use the lens.",
+          "type": "string"
+        },
+        "facets": {
+          "description": "A list of facet types that this lens can translate bidirectionally between. For example, if you include `pub.leaflet.richtext.facet#bold` and `at.markpub.facet#strong` then this lens can be used to translate between those two facet types and any renderer that understands either of those facet types can use this lens to render the facets it understands.",
+          "type": "array",
+          "items": {
+            "type": "union",
+            "closed": false,
+            "refs": []
+          }
+        },
+        "outputCode": {
+          "description": "You may include code here intended to process a string with the provided facets. This is optional and not expected to be used by most lenses, but it can be helpful for testing or for providing examples of how a renderer might use the lens.",
+          "type": "string"
+        },
+        "outputTargetHTML": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "required": [
+        "facets"
+      ]
+    }
+  }
+}

@@ -294,6 +294,7 @@ const lens = {
       optional: true
     },
     outputTargetHTML: {
+      "description": "An optional HTML snippet that shows what the output of this lens is intended to look like. This is optional but can be helpful for documentation purposes and for anyone trying to understand how to use the lens.",
       optional: true,
       type: "string",
       examples: ["&lt;strong&gt;&lt;/strong&gt;", "&lt;a&gt;"]

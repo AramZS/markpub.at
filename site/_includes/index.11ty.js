@@ -6,7 +6,7 @@ module.exports = async function(data) {
     innerBody: `${data.content}
 
       <h2>Lexicons:</h2><br />
-      <pre><code class="language.json language-json">${data.lexicons ? this.processLexs(data.lexicons, 'h3') : ''}</code></pre>
+     ${data.lexicons ? this.processLexs(data.lexicons, 'h3') : ''}
 
       <a id="examples"></a>
       ${data.lexicons ? this.getAllExampleOutput(data.lexicons, '2') : ''}

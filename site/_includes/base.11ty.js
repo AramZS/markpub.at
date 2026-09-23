@@ -1,4 +1,5 @@
 const footer = require("./partials/footer.11ty.js");
+const seo = require("./partials/seo.11ty.js");
 
 module.exports = async function(data, zones) {
   // console.log("layout data", data);
@@ -57,6 +58,7 @@ module.exports = async function(data, zones) {
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    ${await seo(data, zones)}
 		${zones.earlyHead || ''}
 		${templateStyle}
 		${zones.lateHead || ''}
@@ -184,7 +186,7 @@ module.exports = async function(data, zones) {
     <!-- ══════════════════════════════════
          MESSAGE BUTTON — Bottom left circle
          ══════════════════════════════════ -->
-    <button id="grab-input" class="msg-btn" aria-label="Open Markdown Input" title="Markdown Input">
+    <button id="grab-input" class="msg-btn" aria-label="Submit Markdown Input" title="Submit Markdown Input">
       <!-- Speech bubble icon -->
       <svg class="msg-btn__icon" xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 24 24" aria-hidden="true">

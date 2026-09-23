@@ -1,0 +1,81 @@
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        {%- if ogtype === "article" -%}
+        "@type": "Blog",
+        {%- elif ogtype === "video" or ogtype === "video.movie" or ogtype === "video.tv_show" -%}
+        "@type": "Review",
+        {%- else -%}
+        "@type": "WebSite",
+        {%- endif -%}
+        {%- if linkInternal -%}
+        "url": "{{ mainPageUrl }}",
+        {%- else -%}
+        "url": "{{ canonical or isBasedOn or mainPageUrl }}",
+        {% endif %}
+        "headline": "{{ title or metadata.title | safe }}",
+        "about": "{{ description or metadata.description }}",
+        "image": [
+            "{{ finalSocialImage }}"
+        ],
+        "isAccessibleForFree": "True",
+        "isPartOf": {
+            "@type": ["CreativeWork", "Product"],
+            "name": "{{ metadata.title | safe }}",
+            "productID": "{{metadata.url}}"
+        },
+        {% if isBasedOn %}
+        "isBasedOn": "{% if localBasedOn %}{{metadata.url}}{% endif %}{{ isBasedOn }}",
+        {% endif %}
+        {%- if cite and cite.author -%}
+        "author": [
+            {% include "partials/json-ld-objs/person.njk" -%}
+            {
+                "@type": "Person",
+                "name": "{{ cite.author }}"
+            }
+        ],
+        {% else %}
+        "author": {% include "partials/json-ld-objs/person.njk" -%}
+        {% endif %}
+        "editor": {% include "partials/json-ld-objs/person.njk" -%}
+        "inLanguage": "en-US",
+        "license": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "additionalType": "CreativeWork",
+        "alternateName": "{{site.site_name}}",
+    {% if rating %}
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": {{rating}},
+          "worstRating": 1,
+          "bestRating": 5
+        },
+        {% if content %}
+        "reviewBody": "{{ content | striptags | truncate(200, true, '...') | safe }}",
+        {% endif %}
+        "itemReviewed": {
+          {%- if ogtype === "video.tv_show" -%}
+          "@type": "TVSeries",  
+          {%- elif ogtype === "video.movie" -%}
+          "@type": "Movie",  
+          {%- else -%}
+          "@type": "VidoObject",
+          {% endif %}
+          "name": "{{ title or metadata.title | safe }}"
+        },
+        {% if first_air_date %}"startDate": "{{ first_air_date }}",{% endif %}
+        {% if release_date %}"datePublished": "{{ release_date }}",{% endif %}
+    {% endif %}
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{ metadata.title | safe }}",
+            "description": "{{ metadata.description }}",
+            "sameAs": "https://aramzs.xyz/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ metadata.url }}/{{metadata.defaultSocialImage}}"
+            },
+            "publishingPrinciples": "http://aramzs.github.io/about/"
+        }
+    }
+</script>

@@ -347,6 +347,12 @@ header > h2 {
   }
 }
 
+@media (max-height: 710px) {
+  .nameplate {
+    display: none;
+  }
+}
+
 /* ── HUD (Top Right) ────────────────────────────────────────── 
 .hud {
   position: absolute;

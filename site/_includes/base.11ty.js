@@ -17,13 +17,13 @@ module.exports = async function(data, zones) {
   if (isHome) {
     homeLink = /*html*/ `<a href="#page-top" title="Go to top">          
     <button class="sidebar__icon" aria-label="home" title="Home">
-      <img src="/assets/imgs/markpubat-logo-transparent.png" alt="Home icon" class="sidebar__icon-img" aria-hidden="true">
+      <img src="/assets/imgs/logo.png" alt="Home icon" class="sidebar__icon-img" aria-hidden="true">
     </button>
           </a>`;
   } else {
     homeLink = /*html*/ `<a href="/" title="Go to home page">          
     <button class="sidebar__icon" aria-label="home button" title="Home">
-      <img src="/assets/imgs/markpubat-logo-transparent.png" alt="Home icon" class="sidebar__icon-img" aria-hidden="false">
+      <img src="/assets/imgs/logo.png" alt="Home icon" class="sidebar__icon-img" aria-hidden="false">
     </button>
           </a>`;
     compassLinks = {

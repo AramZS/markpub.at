@@ -303,18 +303,19 @@ header > h2 {
   filter: brightness(0);
 }
 
-.sidebar__icon:hover {
-  opacity: 0.75;
-}
-
-.sidebar__icon:hover .sidebar__icon-img {
+.old-sidebar__icon:hover .sidebar__icon-img {
   filter: invert(25%) sepia(79%) saturate(1076%) hue-rotate(126deg)
     brightness(60%) contrast(119%);
 }
 
+.sidebar__icon:hover .sidebar__icon-img {
+  fill: #dcfc24;
+  filter: brightness(1);
+}
+
 .sidebar__icon:hover {
-  transform: scale(1.15);
-  opacity: 0.75;
+  transform: scale(1.2);
+  opacity: 1;
 }
 
 .sidebar-item.src {
@@ -343,7 +344,7 @@ header > h2 {
 @media (max-height: 890px) {
   .nameplate {
     font-size: 1.8vh;
-    top: 42%
+    top: 42%;
   }
 }
 

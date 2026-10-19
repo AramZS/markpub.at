@@ -158,10 +158,10 @@ module.exports = [
       },
       flavor: {
         description:
-          "Markdown may be rendered in many flavors. The most common are CommonMark and Github Flavored Markdown (GFM). Generally your markdown is one of those two and if you don't know then it is likely CommonMark. At this time the lexicon only recognizes these two flavors. Submit a PR if you think one should be added.",
+          "Markdown may be rendered in many flavors. The most common are CommonMark and Github Flavored Markdown (GFM). Generally your markdown is one of those two and if you don't know then it is likely CommonMark. An increasing number of sites are using a slight variant called Obsidian Flavored Markdown (OFM) At this time the lexicon only recognizes these three flavors. Submit a PR if you think one should be added.",
         type: 'string',
-        knownValues: ['gfm', 'commonmark'],
-        examples: ['gfm', 'commonmark'],
+        knownValues: ['gfm', 'commonmark', 'ofm'],
+        examples: ['gfm', 'commonmark', 'ofm'],
         optional: true,
       },
       renderingRules: {
